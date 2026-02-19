@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <title>Meu Perfil | Ferrari</title>
+    <link rel="icon" href="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233739/cavalo_rampante_raid9g.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css" />
+
+
+    <style>
+        /* Estilos específicos do Perfil */
+
+
+        .profile-content {
+            padding: 50px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+                    font-family: 'Arial', sans-serif;
+        }
+
+        /* Seção de Informações do Usuário */
+        .user-info-section {
+            display: flex;
+            align-items: flex-start;
+            gap: 50px;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #444;
+                    font-family: 'Arial', sans-serif;
+        }
+
+        .profile-picture-lg {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #ff1e1e;
+            box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+            
+        }
+
+        .user-details h1 {
+            color: #ffffff;
+            font-size: 2.5em;
+            margin-top: 0;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+              font-family: 'Arial', sans-serif;
+        }
+
+        .user-details p {
+            font-size: 1.1em;
+            margin: 5px 0;
+            color: #ccc;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .user-details strong {
+            color: #fff;
+            font-weight: bold;
+        }
+
+        /* Seções de Favoritos */
+        .favorites-section {
+            margin-bottom: 40px;
+        }
+
+        .favorites-section h2 {
+            color: #ffffff;
+            border-bottom: 2px solid #ffffff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+                    font-family: 'Arial', sans-serif;
+        }
+
+        .favorites-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .fav-item {
+            background: #000;
+            border: 1px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            position: relative;
+        }
+
+        .fav-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .fav-item-details {
+            padding: 15px;
+        }
+
+        .fav-item-details h3 {
+            margin: 0 0 5px 0;
+            color: #fff;
+            font-size: 1.2em;
+        }
+
+        .fav-item-details p {
+            margin: 0;
+            color: #ccc;
+            font-size: 0.9em;
+        }
+
+        /* Cores Favoritas */
+        .fav-color-preview {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin: 10px auto;
+            border: 3px solid #fff;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        .remove-fav-btn {
+            font-family: 'Arial', sans-serif;
+            background: #444;
+            color: #fff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .remove-fav-btn:hover {
+            background: #ff1e1e;
+        }
+
+        .no-favorites {
+            color: #ccc;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+      <a href="index.html"><img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233739/cavalo_rampante_raid9g.png" alt="Logo" /></a>
+    </div>
+    <nav class="nav">
+      <ul class="nav-menu">
+        <li><a href="https://www.ferrari.com/en-EN/formula1">RACING</a></li>
+        <li><a href="configurator.html">SPORTS CARS</a></li>
+        <li><a href="https://store.ferrari.com/en-br/replica/replica-scuderia-ferrari/?_gl=1*1q3x63r*_gcl_au*MTU5MDEwMzYzOC4xNzU2NDIxNDYz*_ga*MzQ5NTQ2MjIuMTc1MzgyOTMzMw..*_ga_JM1HT9B412*czE3NTc1MjkxNTkkbzQwJGcxJHQxNzU3NTI5NDAxJGozNCRsMCRoMTQzNjI3MzE2OA..&from=GW_superheader&page=3">COLLECTIONS</a></li>
+        <li><a href="https://www.ferrari.com/en-EN/museums">EXPERIENCES</a></li>
+        <li><a href="https://www.ferrari.com/en-EN/news">ABOUT US</a></li>
+      </ul>
+    </nav>
+  </header>
+
+     <a href="configurator.html" class="btn-fechar">
+        <span class="icon">×</span> Fechar
+    </a>
+
+    <div class="profile-content">
+        <div class="user-info-section">
+            <img id="profile-pic" class="profile-picture-lg" src="https://via.placeholder.com/150?text=U" alt="Foto de Perfil">
+            <div class="user-details">
+                <h1 id="user-name">Nome do Usuário</h1>
+                <p>Email: <strong id="user-email">email@exemplo.com</strong></p>
+                <p>Telefone: <strong id="user-phone">(99) 99999-9999</strong></p>
+            </div>
+        </div>
+
+        <section class="favorites-section">
+            <h2>Cores Favoritas</h2>
+            <div id="fav-colors-grid" class="favorites-grid">
+                <p class="no-favorites">Nenhuma cor favoritada ainda.</p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // ATENÇÃO: Em um projeto real, isso estaria em 'script.js'
+        //------------------------------------------------------------------
+        // Lógica do Perfil (Simulada com localStorage)
+        //------------------------------------------------------------------
+        
+        const DEFAULT_PROFILE_PIC_LG = 'https://via.placeholder.com/150?text=U';
+
+        function getLoggedInUser() {
+            const loggedInEmail = localStorage.getItem('loggedInUser');
+            if (loggedInEmail) {
+                const users = JSON.parse(localStorage.getItem('users') || '{}');
+                return users[loggedInEmail];
+            }
+            return null;
+        }
+
+        function loadProfileData() {
+            const user = getLoggedInUser();
+
+            if (!user) {
+                alert('Você não está logado. Redirecionando para o login.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Preenche Informações do Usuário
+            document.getElementById('profile-pic').src = user.profilePic || DEFAULT_PROFILE_PIC_LG;
+            document.getElementById('user-name').textContent = user.name;
+            document.getElementById('user-email').textContent = user.email;
+            document.getElementById('user-phone').textContent = user.phone || 'Não Informado';
+
+            // Carrega Favoritos
+            const favorites = user.favorites || { colors: [] };
+            renderFavoriteColors(favorites.colors);
+        }
+
+
+        function renderFavoriteColors(colors) {
+            const grid = document.getElementById('fav-colors-grid');
+            grid.innerHTML = ''; // Limpa a grid
+
+            if (colors.length === 0) {
+                grid.innerHTML = '<p class="no-favorites">Nenhuma cor favoritada ainda.</p>';
+                return;
+            }
+
+            colors.forEach(color => {
+                const item = document.createElement('div');
+                item.className = 'fav-item';
+                item.innerHTML = `
+                    <img src="${color.imageUrl}" alt="${color.colorName} ${color.carName}">
+                    <div class="fav-item-details">
+                        <div class="fav-color-preview" style="background-color: ${color.bgColor};"></div>
+                        <h3>${color.colorName}</h3>
+                        <p>Carro: ${color.carName}</p>
+                        <button class="remove-fav-btn" data-type="color" data-key="${color.key}">Remover</button>
+                    </div>
+                `;
+                grid.appendChild(item);
+            });
+        }
+
+        function removeFavorite(type, identifier) {
+            const user = getLoggedInUser();
+            let favorites = user.favorites || {  colors: [] };
+
+            if (type === 'car') {
+                favorites.cars = favorites.cars.filter(c => c.name !== identifier);
+                alert(`Carro removido: ${identifier}`);
+            } else if (type === 'color') {
+                favorites.colors = favorites.colors.filter(c => c.key !== identifier);
+                alert(`Cor removida.`);
+            }
+
+            // Salva as alterações
+            const loggedInEmail = localStorage.getItem('loggedInUser');
+            const users = JSON.parse(localStorage.getItem('users'));
+            users[loggedInEmail].favorites = favorites;
+            localStorage.setItem('users', JSON.stringify(users));
+
+            // Recarrega a página de perfil para atualizar as grids
+            loadProfileData(); 
+        }
+
+        // Listener para remover favoritos
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('remove-fav-btn')) {
+                const type = e.target.getAttribute('data-type');
+                if (type === 'car') {
+                    const carName = e.target.getAttribute('data-name');
+                    removeFavorite(type, carName);
+                } else if (type === 'color') {
+                    const key = e.target.getAttribute('data-key');
+                    removeFavorite(type, key);
+                }
+            }
+        });
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', loadProfileData);
+    </script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ferrari</title>
+   <link rel="icon" href="img/icos/cavalo-rampante.ico" type="image/x-icon">
+   <!-- Font Awesome CDN (última versão) -->
+    
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="galeria.css">
+  
+   <style>
+
+
+
+body {
+      margin: 0;
+      overflow-x: scroll;   /* habilita scroll horizontal */
+      overflow-y: hidden;   /* remove scroll vertical */
+      display: flex;        /* coloca os elementos lado a lado */
+      height: 100vh;        /* ocupa altura inteira da tela */
+    }
+
+    section {
+      min-width: 100vw;     /* cada seção ocupa 100% da largura da tela */
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+
+  body.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+body.fade-in {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+  body {
+      background: #000000;
+      margin: 0;
+      padding: 0;
+    }
+
+.container {
+      display: flex;
+      width: 400%; /* 4 páginas lado a lado */
+      height: 100vh;
+      transition: transform 0.8s ease-in-out;
+    }
+
+    .section {
+      width: 100vw;
+      height: 100vh;
+      flex-shrink: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 50px;
+      box-sizing: border-box;
+    }
+
+    .section:nth-child(1) { background: #fff; }
+    .section:nth-child(2) { background: #f4f4f4; }
+    .section:nth-child(3) { background: #eaeaea; }
+    .section:nth-child(4) { background: #ddd; }
+
+    .text {
+      max-width: 40%;
+    }
+
+    .text h1 {
+        color: #000000;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      background-color: white;
+    }
+
+    .text p {
+      font-size: 1.2rem;
+      color: #333;
+    }
+
+    .img {
+      width: 70%;
+      height:100%;
+      background: #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: white;
+    }
+    .imgss {
+      width: 120%;
+      height:120%;
+      align-items: center;
+      justify-content: center;
+      background-color: white;
+    }
+    
+     .imgs {
+      width: 70%;
+      height:100%;
+      background: #ccc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    
+    .colunas {
+  max-width: 800px;       /* largura máxima menor */
+  column-count: 2;        /* mantém duas colunas */
+  column-gap: 30px;       /* espaço entre colunas menor */
+  text-align: justify;
+  font-size: 14px;        /* tamanho de fonte menor */
+  line-height: 1.4;       /* altura de linha mais compacta */
+  position: relative;
+  margin: 40px auto;      /* centralizado e com respiro */
+  color: #000;
+}
+
+.btn-fechar {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  background: white;
+  color: black;
+  padding: 10px 18px;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.btn-fechar .icon {
+  background: black;
+  color: white;
+  font-size: 18px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.btn-fechar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+}
+
+.btn-fechar:active {
+  transform: scale(0.95);
+}
+.video{
+left: -20%;
+}
+
+  </style>
+</head>
+<body>
+     <header class="header">
+    <div class="logo">
+      <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233739/cavalo_rampante_raid9g.png" alt="Logo" />
+    </div>
+    <nav class="nav">
+   <ul class="nav-menu">
+        <li><a href="https://www.ferrari.com/en-EN/formula1">RACING</a></li>
+        <li><a href="configurator.html">SPORTS CARS</a></li>
+        <li><a href="https://store.ferrari.com/en-br/replica/replica-scuderia-ferrari/?_gl=1*1q3x63r*_gcl_au*MTU5MDEwMzYzOC4xNzU2NDIxNDYz*_ga*MzQ5NTQ2MjIuMTc1MzgyOTMzMw..*_ga_JM1HT9B412*czE3NTc1MjkxNTkkbzQwJGcxJHQxNzU3NTI5NDAxJGozNCRsMCRoMTQzNjI3MzE2OA..&from=GW_superheader&page=3">COLLECTIONS</a></li>
+        <li><a href="https://www.ferrari.com/en-EN/museums">EXPERIENCES</a></li>
+        <li><a href="https://www.ferrari.com/en-EN/news">ABOUT US</a></li>
+      </ul>
+    </nav>
+  </header>
+
+   <button class="btn-fechar" onclick="voltarPagina()"> 
+  <span class="icon">×</span>
+  <span class="texto">Fechar</span>
+</button>
+
+  <div class="container" id="slider">
+    <div class="section">
+        <div class="img">
+       <img class="imgs" src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1760654740/c9563ce3-a034-42d8-b098-cd6b0cbd6b39.png" alt="">
+      </div>
+    </div>
+  <video controls class="video">
+    <source src="https://res.cloudinary.com/dmxgurkfj/video/upload/v1760654287/YEBT0H_F167_mod_motore_focus_cofango_v02_DESKTOP_EKHIDD_1_jvynsb.mp4" type="video/mp4">
+    Seu navegador não suporta vídeos.
+  </video>
+    </div>
+
+      <div class="container" id="slider">
+<div class="section">
+</div>
+
+      <div class="container" id="slider">
+    <div class="section">
+      <div class="img">
+       <img class="imgs" src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1760655462/28a38c0d-7c20-4160-9129-4443bc858f8e.png" alt="">
+      </div>
+    </div>
+
+     <div class="container" id="slider">
+    <div class="section">
+      <div class="imgss">
+       <img class="imgs" src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1760738724/662cf5cfa44e370010b54770-ferrari-12cilindri-engine-focus-3_utrfzv.avif" alt="">
+      </div>
+    </div>
+
+
+<script>
+   function voltarPagina() {
+    window.history.back();
+  }
+</script>
+</body>
+</html>

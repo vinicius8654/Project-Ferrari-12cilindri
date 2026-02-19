@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ferrari Configurator</title>
+    <link rel="icon" href="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233739/cavalo_rampante_raid9g.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="configurator.css">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="galeria.css">
+
+    <style>
+        body {
+            background: #1A1A1A;
+            margin: 0;
+            padding: 0;
+            font-family: 'Ferrari Sans', Arial, sans-serif; /* Assumindo uma fonte Ferrari ou fallback */
+            color: #fff;
+        }
+
+        /* Classes de cores para os botões e outros ajustes */
+        .color-buttons button,
+        .botoes button,
+        .botoess button {
+            padding: 40px 45px;
+            margin: 5px;
+            border-radius: 50px;
+            cursor: pointer;
+            color: #fff;
+            border: 1px solid #ccc;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            position: relative; /* Para o botão de favorito */
+        }
+
+        /* Botão de favorito dentro do botão de cor */
+        .color-buttons button .fav-btn,
+        .botoes button .fav-btn,
+        .botoess button .fav-btn {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.2em;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 10px;
+            vertical-align: middle;
+            transition: color 0.3s;
+        }
+
+        .color-buttons button .fav-btn.favorited,
+        .botoes button .fav-btn.favorited,
+        .botoess button .fav-btn.favorited {
+            color: gold; /* Cor quando favoritado */
+        }
+        
+        /* Paleta de cores (MANTIDA) */
+        /* ... (todas as suas classes de cores anteriores aqui) ... */
+        .color-buttons button:nth-child(1) { background: #ff1e1e; color: #ffffff; border: 1px solid #ccc; } /* Rosso Corsa */
+        .color-buttons button:nth-child(2) { background: #c0a104; color: #000; border: 1px solid #ccc; } /* Giallo Montecarlo */
+        .color-buttons button:nth-child(3) { background: #b22222; color: #dfcccc; border: 1px solid #ccc; } /* Rosso Imola */
+        .color-buttons button:nth-child(4) { background: #fff; color: #000; border: 1px solid #ccc; } /* Bianco Artico */
+        .color-buttons button:nth-child(5) { background: #0046ad; color: #ffffff; border: 1px solid #ccc;} /* Blu Corsa */
+        .color-buttons button:nth-child(6) { background: #50929d; color: #000; border: 1px solid #ccc; } /* Celeste Trevi */
+        .color-buttons button:nth-child(7) { background: #cecece; color: #000; border: 1px solid #ccc; } /* Argento Nurburgring */
+        
+        .botoes button:nth-child(1) { background: #ff1e1e; color: #ffffff; } /* Argento Nurburgring */
+        .botoes button:nth-child(2) { background: #c0a104; color: #000; } /* Argento Nurburgring */
+        .botoes button:nth-child(3) { background: #b22222; color: #ffffff; } /* Argento Nurburgring */
+        .botoes button:nth-child(4) { background: #fff; color: #000; } /* Argento Nurburgring */
+        .botoes button:nth-child(5) { background: #2d0707; color: #ffffff; } /* Argento Nurburgring */
+        .botoes button:nth-child(6) { background: #10afac; color: #000; } /* Argento Nurburgring */
+        .botoes button:nth-child(7) { background: #340052; color: #f0f0f0; } /* Argento Nurburgring */
+        .botoes button:nth-child(8) { background: #a2a4a2; color: #000; } /* Argento Nurburgring */
+
+        .botoess button:nth-child(1) { background: #ff1e1e; color: #fffefe; } /* Grigio Titanio Metallizzato*/
+        .botoess button:nth-child(2) { background: #c0a104; color: #000; } /* Rosso imola */
+        .botoess button:nth-child(3) { background: #b22222; color: #ffffff; } /* Giallo Modena */
+        .botoess button:nth-child(4) { background:  #96b9da; color: #000; } /* Rosso Imola */
+        .botoess button:nth-child(5) { background: #050131; color: #ffffff; } /* Asseto Fiorano Rosso Imola */
+        .botoess button:nth-child(6) { background: #b00404; color: #eaeaea; } /* Asseto Fiorano Blu De France */
+        .botoess button:nth-child(7) { background: #292829; color: #f0f0f0; } /* Asseto Fiorano Grigio Scuro */
+        /* Ocultar todas imagens exceto a ativa */
+        section img {
+            max-width: 100%;
+            opacity: 0;
+            transition: opacity 0.7s ease; /* efeito de fade */
+        }
+        section img.active {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="fade-in">
+
+    <header class="header">
+        <div class="logo">
+            <a href="index.html">
+                <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233739/cavalo_rampante_raid9g.png" alt="Logo" />
+            </a>
+        </div>
+        <nav class="nav">
+            <ul class="nav-menu">
+                <li><a href="https://www.ferrari.com/en-EN/formula1">RACING</a></li>
+                <li><a href="index.html">SPORTS CARS</a></li>
+                <li><a href="https://store.ferrari.com/en-br/replica/replica-scuderia-ferrari/">COLLECTIONS</a></li>
+                <li><a href="https://www.ferrari.com/en-EN/museums">EXPERIENCES</a></li>
+                <li><a href="https://www.ferrari.com/en-EN/news">ABOUT US</a></li>
+            </ul>
+        </nav>
+        
+        <div class="user-profile-container">
+            <button id="profile-toggle-btn" class="profile-toggle-btn">
+                <img id="profile-img-header" src="https://via.placeholder.com/40?text=U" alt="Perfil" class="profile-img-header">
+            </button>
+            <div id="profile-sidebar" class="profile-sidebar">
+                <div class="sidebar-header">
+                    <img id="profile-img-sidebar" src="https://via.placeholder.com/80?text=U" alt="Perfil" class="profile-img-sidebar">
+                    <button class="close-sidebar-btn" onclick="toggleSidebar()">×</button>
+                </div>
+                <div class="sidebar-menu">
+                    <a href="perfil.html" class="sidebar-link">
+                        <i class="fas fa-user-circle"></i> Página de Perfil
+                    </a>
+                    <button id="logout-btn" class="sidebar-link logout">
+                        <i class="fas fa-sign-out-alt"></i> Sair da Conta
+                    </button>
+                    </div>
+            </div>
+        </div>
+        </header>
+
+    <a href="index.html" class="btn-fechar">
+        <span class="icon">×</span> Fechar
+    </a>
+
+    <div class="entry">
+        <div class="cills">
+            <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233733/12cillindri_eby75k.png" alt="12Cilindri">
+        </div>
+    </div>
+
+    <section class="showcase" data-car-name="12Cilindri">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233776/Rosso_Corsa_pqfvce.jpg" data-car-color="Rosso Corsa" alt="Rosso Corsa" class="active">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233772/giallo_montecarlo_u97w81.jpg" data-car-color="Giallo Montecarlo" alt="Giallo Montecarlo">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233774/rosso_Imola_dyepdx.jpg" data-car-color="Rosso Imola" alt="Rosso Imola">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233779/Bianco_Artico_iihfpn.jpg" data-car-color="Bianco Artico" alt="Bianco Artico">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233771/blu_corsa_ue0edx.jpg" data-car-color="Blu Corsa" alt="Blu Corsa">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233769/celeste_trevi_xct8n1.jpg" data-car-color="Celeste Trevi" alt="Celeste Trevi">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233777/argento_nurburgring_ztqmgv.jpg" data-car-color="Argento Nurburgring" alt="Argento Nurburgring">
+
+        <div class="color-buttons">
+            <button data-index="0" data-color-name="Rosso Corsa" data-car-name="12Cilindri">Rosso Corsa <i class="far fa-star fav-btn" data-color="Rosso Corsa" data-car="12Cilindri"></i></button>
+            <button data-index="1" data-color-name="Giallo Montecarlo" data-car-name="12Cilindri">Giallo Montecarlo <i class="far fa-star fav-btn" data-color="Giallo Montecarlo" data-car="12Cilindri"></i></button>
+            <button data-index="2" data-color-name="Rosso Imola" data-car-name="12Cilindri">Rosso Imola <i class="far fa-star fav-btn" data-color="Rosso Imola" data-car="12Cilindri"></i></button>
+            <button data-index="3" data-color-name="Bianco Artico" data-car-name="12Cilindri">Bianco Artico <i class="far fa-star fav-btn" data-color="Bianco Artico" data-car="12Cilindri"></i></button>
+            <button data-index="4" data-color-name="Blu Corsa" data-car-name="12Cilindri">Blu Corsa <i class="far fa-star fav-btn" data-color="Blu Corsa" data-car="12Cilindri"></i></button>
+            <button data-index="5" data-color-name="Celeste Trevi" data-car-name="12Cilindri">Celeste Trevi <i class="far fa-star fav-btn" data-color="Celeste Trevi" data-car="12Cilindri"></i></button>
+            <button data-index="6" data-color-name="Argento Nurburgring" data-car-name="12Cilindri">Argento Nurburgring <i class="far fa-star fav-btn" data-color="Argento Nurburgring" data-car="12Cilindri"></i></button>
+        </div>
+      
+    </section>
+
+    <div class="entrys">
+        <div class="amalfi">
+            <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1758231809/AmalfiLogo_y3jxzb.png" alt="Ferrari Amalfi">
+        </div>
+    </div>
+
+
+    <section class="car" data-car-name="Amalfi">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1757531481/Rosso_Corsa_DS_mnzvhp.jpg" data-car-color="Rosso Corsa" alt="Rosso Corsa" class="active">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1757531481/Giallo_Montecarlo_Amalfi_uahkwn.jpg" data-car-color="Giallo Montecarlo" alt="Giallo Montecarlo">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1757531482/Rosso_Portofino_s0svqd.jpg" data-car-color="Rosso Portofino" alt="Rosso Portofino">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1757531486/Bianco_Artico_PPG_dydmax.jpg" data-car-color="Bianco Artico" alt="Bianco Artico">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1757531482/Rubino_Micalizzato_p3dhvf.jpg" data-car-color="Rubino Micalizzato" alt="Rubino Micalizzato">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1757531485/Verde_Costiera_ujnnsr.jpg" data-car-color="Verde Costiera" alt="Verde Costiera">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1757531486/Violetto_Dino_k1xsej.jpg" data-car-color="Violleto Dino" alt="Violleto Dino">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1757531481/Grigio_Abu_Dhabi_w1lasm.jpg" data-car-color="Grigio Abu Dhabi" alt="Grigio Abu Dhabi">
+
+        <div class="botoes">
+            <button data-index="0" data-color-name="Rosso Corsa" data-car-name="Amalfi">Rosso Corsa <i class="far fa-star fav-btn" data-color="Rosso Corsa" data-car="Amalfi"></i></button>
+            <button data-index="1" data-color-name="Giallo Montecarlo" data-car-name="Amalfi">Giallo Montecarlo <i class="far fa-star fav-btn" data-color="Giallo Montecarlo" data-car="Amalfi"></i></button>
+            <button data-index="2" data-color-name="Rosso Portofino" data-car-name="Amalfi">Rosso Portofino <i class="far fa-star fav-btn" data-color="Rosso Portofino" data-car="Amalfi"></i></button>
+            <button data-index="3" data-color-name="Bianco Artico" data-car-name="Amalfi">Bianco Artico <i class="far fa-star fav-btn" data-color="Bianco Artico" data-car="Amalfi"></i></button>
+            <button data-index="4" data-color-name="Rubino Micalizzato" data-car-name="Amalfi">Rubino Micalizzato <i class="far fa-star fav-btn" data-color="Rubino Micalizzato" data-car="Amalfi"></i></button>
+            <button data-index="5" data-color-name="Verde Costiera" data-car-name="Amalfi">Verde Costiera <i class="far fa-star fav-btn" data-color="Verde Costiera" data-car="Amalfi"></i></button>
+            <button data-index="6" data-color-name="Violleto Dino" data-car-name="Amalfi">Violleto Dino <i class="far fa-star fav-btn" data-color="Violleto Dino" data-car="Amalfi"></i></button>
+            <button data-index="7" data-color-name="Grigio Abu Dhabi" data-car-name="Amalfi">Grigio Abu Dhabi <i class="far fa-star fav-btn" data-color="Grigio Abu Dhabi" data-car="Amalfi"></i></button>
+        </div>
+    </section>
+
+    <div class="gtb">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1758236975/296logo_myk9in.png" alt="296 GTB">
+    </div>
+
+    <section class="cars" data-car-name="296 GTB">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1758236987/Rosso_Scuderia_296_jflrde.jpg" data-car-color="Rosso Scuderia" alt="Rosso Scuderia" class="active">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1758236983/Giallo_Modena_uidkwu.jpg" data-car-color="Giallo Modena" alt="Giallo Modena">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1758236982/Rosso_Imola_296_antfvi.jpg" data-car-color="Rosso Imola" alt="Rosso Imola">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1758236980/Grigio_Titanio_Metallizzato_aepjia.jpg" data-car-color="Grigio Titanio" alt="Grigio Titanio">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1758236977/Asseto_Fiorano_BLU_TOUR_DE_FRANCE_ozvdpp.jpg" data-car-color="Asseto Fiorano Blu Metallizzato" alt="Asseto Fiorano Blu Metallizzato">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1758236984/Asseto_Fiorano_Rosso_Imola_ffpz47.jpg" data-car-color="Asseto Fiorano Rosso Imola" alt="Asseto Fiorano Rosso Imola">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1758236984/Asseto_Fiorano_GRIGIO_SCURO_guhxcn.jpg" data-car-color="Asseto Fiorano Grigio Scuro" alt="Asseto Fiorano Grigio Scuro ">
+
+
+        <div class="botoess">
+            <button data-index="0" data-color-name="Rosso Scuderia" data-car-name="296 GTB">Rosso Scuderia <i class="far fa-star fav-btn" data-color="Rosso Scuderia" data-car="296 GTB"></i></button>
+            <button data-index="1" data-color-name="Giallo Modena" data-car-name="296 GTB">Giallo Modena <i class="far fa-star fav-btn" data-color="Giallo Modena" data-car="296 GTB"></i></button>
+            <button data-index="2" data-color-name="Rosso Imola" data-car-name="296 GTB">Rosso Imola <i class="far fa-star fav-btn" data-color="Rosso Imola" data-car="296 GTB"></i></button>
+            <button data-index="3" data-color-name="Grigio Titanio" data-car-name="296 GTB">Grigio Titanio <i class="far fa-star fav-btn" data-color="Grigio Titanio" data-car="296 GTB"></i></button>
+            <button data-index="4" data-color-name="Asseto Fiorano Blu Metallizzato" data-car-name="296 GTB">Asseto Fiorano Blu Metallizzato <i class="far fa-star fav-btn" data-color="Asseto Fiorano Blu Metallizzato" data-car="296 GTB"></i></button>
+            <button data-index="5" data-color-name="Asseto Fiorano Rosso Imola" data-car-name="296 GTB">Asseto Fiorano Rosso Imola <i class="far fa-star fav-btn" data-color="Asseto Fiorano Rosso Imola" data-car="296 GTB"></i></button>
+            <button data-index="6" data-color-name="Asseto Fiorano Grigio Scuro" data-car-name="296 GTB">Asseto Fiorano Grigio Scuro <i class="far fa-star fav-btn" data-color="Asseto Fiorano Grigio Scuro" data-car="296 GTB"></i></button>
+        </div>
+    
+    </section>
+
+    <script>
+        // Carrega o script de autenticação e funcionalidades
+        // ATENÇÃO: Em um projeto real, isso estaria em 'script.js'
+        //------------------------------------------------------------------
+        // Lógica de Autenticação e Favoritos (Simulada com localStorage)
+        //------------------------------------------------------------------
+
+        const DEFAULT_PROFILE_PIC = 'https://via.placeholder.com/40?text=U';
+        
+        function getLoggedInUser() {
+            const loggedInEmail = localStorage.getItem('loggedInUser');
+            if (loggedInEmail) {
+                const users = JSON.parse(localStorage.getItem('users') || '{}');
+                return users[loggedInEmail];
+            }
+            return null;
+        }
+
+        function checkAuthenticationAndSetup() {
+            const user = getLoggedInUser();
+            const profileImgHeader = document.getElementById('profile-img-header');
+            const profileImgSidebar = document.getElementById('profile-img-sidebar');
+            const profileToggleBtn = document.getElementById('profile-toggle-btn');
+            
+            if (user) {
+                // Usuário logado: Atualiza a foto e torna o botão clicável
+                const imgSource = user.profilePic || DEFAULT_PROFILE_PIC;
+                profileImgHeader.src = imgSource;
+                profileImgSidebar.src = imgSource;
+                profileToggleBtn.onclick = toggleSidebar; // Ativa o menu lateral
+                
+                // Inicializa os botões de favoritos
+                initializeFavoriteButtons(user.favorites);
+
+            } else {
+                // Usuário não logado: Redireciona para o login ou mantém o ícone padrão e bloqueia o menu
+                profileImgHeader.src = DEFAULT_PROFILE_PIC;
+                profileImgSidebar.src = DEFAULT_PROFILE_PIC;
+                profileToggleBtn.onclick = () => {
+                    alert('Por favor, faça login ou cadastre-se para acessar o perfil.');
+                    window.location.href = 'login.html';
+                };
+            }
+        }
+        
+        // Função para abrir/fechar o menu lateral
+        function toggleSidebar() {
+            const sidebar = document.getElementById('profile-sidebar');
+            sidebar.classList.toggle('open');
+        }
+
+        // Função de Logout
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            localStorage.removeItem('loggedInUser');
+            alert('Você saiu da sua conta.');
+            window.location.href = 'login.html'; // Redireciona para a página de login
+        });
+
+
+        //------------------------------------------------------------------
+        // Lógica dos Favoritos (Cores e Carros)
+        //------------------------------------------------------------------
+
+        function saveFavorites(favorites) {
+            const loggedInEmail = localStorage.getItem('loggedInUser');
+            if (loggedInEmail) {
+                const users = JSON.parse(localStorage.getItem('users'));
+                users[loggedInEmail].favorites = favorites;
+                localStorage.setItem('users', JSON.stringify(users));
+                return true;
+            }
+            return false;
+        }
+
+        function toggleFavorite(type, data) {
+            const user = getLoggedInUser();
+            if (!user) {
+                alert('Você precisa estar logado para favoritar.');
+                window.location.href = 'login.html';
+                return;
+            }
+
+            let favorites = user.favorites || { cars: [], colors: [] };
+            
+            if (type === 'car') {
+                const index = favorites.cars.findIndex(c => c.name === data.name);
+                if (index > -1) {
+                    favorites.cars.splice(index, 1); // Remove
+                    alert(`Carro ${data.name} removido dos favoritos!`);
+                } else {
+                    // Adiciona o carro. A URL da imagem é a da primeira imagem da seção.
+                    const carSection = document.querySelector(`section[data-car-name="${data.name}"]`);
+                    const imgUrl = carSection ? carSection.querySelector('img').src : '';
+                    favorites.cars.push({ name: data.name, imageUrl: imgUrl }); // Adiciona
+                    alert(`Carro ${data.name} favoritado!`);
+                }
+            } else if (type === 'color') {
+                const key = `${data.carName}-${data.colorName}`;
+                const index = favorites.colors.findIndex(c => c.key === key);
+                if (index > -1) {
+                    favorites.colors.splice(index, 1); // Remove
+                    alert(`Cor ${data.colorName} do ${data.carName} removida dos favoritos!`);
+                } else {
+                    // Adiciona a cor. A URL da imagem é a da imagem ativa da cor.
+                    const carSection = document.querySelector(`section[data-car-name="${data.carName}"]`);
+                    const imgElement = carSection.querySelector(`img[data-car-color="${data.colorName}"]`);
+                    const colorButton = carSection.querySelector(`button[data-color-name="${data.colorName}"]`);
+                    const bgColor = colorButton ? window.getComputedStyle(colorButton).backgroundColor : '#000';
+                    
+                    favorites.colors.push({ 
+                        key: key, 
+                        carName: data.carName, 
+                        colorName: data.colorName, 
+                        imageUrl: imgElement ? imgElement.src : '', 
+                        bgColor: bgColor // Adiciona a cor de fundo do botão
+                    }); // Adiciona
+                    alert(`Cor ${data.colorName} do ${data.carName} favoritada!`);
+                }
+            }
+            
+            if (saveFavorites(favorites)) {
+                // Atualiza o estado dos ícones na página
+                updateFavoriteIcons(favorites);
+            }
+        }
+
+        function updateFavoriteIcons(favorites) {
+            const favCarBtns = document.querySelectorAll('.favorite-car-btn');
+            const favColorIcons = document.querySelectorAll('.fav-btn');
+
+            // 1. Botões de Carro
+            favCarBtns.forEach(btn => {
+                const carName = btn.getAttribute('data-car-name');
+                const icon = btn.querySelector('.car-fav-icon');
+                const isFavorited = favorites.cars.some(c => c.name === carName);
+                
+                icon.className = isFavorited ? 'fas fa-heart car-fav-icon' : 'far fa-heart car-fav-icon';
+                btn.classList.toggle('favorited', isFavorited);
+            });
+
+            // 2. Ícones de Cor
+            favColorIcons.forEach(icon => {
+                const carName = icon.getAttribute('data-car');
+                const colorName = icon.getAttribute('data-color');
+                const key = `${carName}-${colorName}`;
+                const isFavorited = favorites.colors.some(c => c.key === key);
+
+                icon.className = isFavorited ? 'fas fa-star fav-btn favorited' : 'far fa-star fav-btn';
+            });
+        }
+
+        function initializeFavoriteButtons(favorites) {
+            // Inicializa o estado dos ícones
+            updateFavoriteIcons(favorites || { cars: [], colors: [] });
+
+            // Event Listeners para botões de Cor
+            document.querySelectorAll('.fav-btn').forEach(icon => {
+                icon.addEventListener('click', (event) => {
+                    event.stopPropagation(); // Impede que o clique ative a troca de cor do botão pai
+                    const carName = icon.getAttribute('data-car');
+                    const colorName = icon.getAttribute('data-color');
+                    toggleFavorite('color', { carName, colorName });
+                });
+            });
+
+            // Event Listeners para botões de Carro
+            document.querySelectorAll('.favorite-car-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const carName = btn.getAttribute('data-car-name');
+                    toggleFavorite('car', { name: carName });
+                });
+            });
+        }
+
+        //------------------------------------------------------------------
+        // Lógica do Configurator (MANTIDA e Adaptada)
+        //------------------------------------------------------------------
+        
+        function ativarGaleria(sectionSelector, buttonSelector) {
+            const section = document.querySelector(sectionSelector);
+            const imgs = section.querySelectorAll("img");
+            const btns = section.querySelectorAll(buttonSelector);
+
+            btns.forEach(btn => {
+                btn.addEventListener("click", (event) => {
+                    // Verifica se o clique foi no ícone de favorito, se sim, a troca de imagem é ignorada
+                    if (event.target.classList.contains('fav-btn')) {
+                        return; 
+                    }
+                    const index = btn.getAttribute("data-index");
+                    imgs.forEach(img => img.classList.remove("active"));
+                    imgs[index].classList.add("active");
+                });
+            });
+        }
+
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAuthenticationAndSetup(); // Verifica login e configura o menu/favoritos
+
+            // Ativa as galerias existentes
+            ativarGaleria(".showcase", ".color-buttons button");
+            ativarGaleria(".car", ".botoes button");
+            ativarGaleria(".cars", ".botoess button");
+
+            // Fecha o sidebar ao clicar fora
+            document.addEventListener('click', function(event) {
+                const sidebar = document.getElementById('profile-sidebar');
+                const toggleBtn = document.getElementById('profile-toggle-btn');
+                if (!sidebar.contains(event.target) && !toggleBtn.contains(event.target) && sidebar.classList.contains('open')) {
+                    sidebar.classList.remove('open');
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

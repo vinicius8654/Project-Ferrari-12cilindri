@@ -1,0 +1,148 @@
+/* galeria.css */
+body {
+  margin: 0;
+  background-color: #1A1A1A;
+  color: white;
+  font-family: sans-serif;
+}
+
+.tabs {
+  display: flex;
+  justify-content: center;
+  background-color:#1A1A1A;
+  padding: 10px 0;
+  border-bottom: 1px solid #1A1A1A;
+}
+
+.tab {
+
+  padding: 10px 20px;
+  cursor: pointer;
+  margin: 0 10px;
+  background-color: #1A1A1A;
+  border: 1px solid #1A1A1A;
+  border-radius: 5px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.tab:hover {
+  background-color: #c00;
+  transform: scale(1.05);
+}
+
+.tab.active {
+  background-color: #c00;
+  color: white;
+}
+
+.gallery {
+  display: none;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+  gap: 15px;
+}
+
+.gallery.active {
+  display: flex;
+}
+
+.gallery img {
+  width: 220px;
+  cursor: pointer;
+  border: 2px solid #222;
+  border-radius: 6px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+  border-color: #c00;
+}
+
+.gallery video {
+  width: 90%;
+  max-width: 900px;
+  border: 4px solid #c00;
+  border-radius: 8px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color:#1A1A1A;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.modal.active {
+  display: flex;
+  opacity: 1;
+}
+
+#modal-img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #c00;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.album {
+  width: 240px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  box-sizing: border-box;
+  background-color: #1A1A1A;
+  border-radius: 8px;
+  transition: transform 0.2s;
+  height: 280px; /* ou remova para deixar flexível */
+  /* Remova isso: justify-content: space-between; */
+}
+
+.album img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border: 2px solid #1A1A1A;
+  border-radius: 6px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.album p {
+  margin-top: 6px; /* Reduza a margem aqui */
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  text-align: center;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.back-btn {
+  background-color: #c00;
+  border: none;
+  padding: 10px 20px;
+  color: white;
+  margin-bottom: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+}

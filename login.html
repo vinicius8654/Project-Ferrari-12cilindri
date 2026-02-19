@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8">
+    <title>Login | Ferrari</title>
+    <link rel="icon" href="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233739/cavalo_rampante_raid9g.png" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Estilos básicos e da Ferrari */
+        body {
+            background: #570000;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+        
+        }
+
+        .auth-container {
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 253, 253, 0.5);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            height: 100%; /* Altura total */
+            overflow-y: auto; /* Permite rolagem interna */
+            box-sizing: border-box; /* Inclui padding e border no cálculo da largura e altura */
+        }
+
+        .auth-container h2 {
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .logo-small {
+            width: 50px;
+            margin-bottom: 20px;
+        }
+
+        /* Formulários */
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ccc;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="password"],
+        .form-group input[type="tel"],
+        .form-group input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background: #222;
+            color: #fff;
+            box-sizing: border-box;
+        }
+
+        /* Botões */
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #ff1e1e;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #cc0000;
+        }
+
+        .toggle-form {
+            margin-top: 20px;
+            color: #ccc;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        /* Ocultar Formulário */
+        .hidden-form {
+            display: none;
+        }
+
+        .profile-pic-preview {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ff1e1e;
+            margin: 10px auto;
+            display: block;
+        }
+         video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1; /* Coloca o vídeo atrás do conteúdo */
+            transform: translate(-50%, -50%);
+            object-fit: cover; /* Cobre toda a área */
+        }
+    </style>
+</head>
+<body>
+  <video autoplay muted loop playsinline class="video">
+    <source src="https://res.cloudinary.com/dmxgurkfj/video/upload/v1756234062/Welcome-the-Ferrari-12Cilindri_mvmsdg.webm" type="video/webm" />
+    Seu navegador não suporta o formato de vídeo.</video>
+    <div class="auth-container">
+        <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233739/cavalo_rampante_raid9g.png" alt="Logo Ferrari" class="logo-small">
+        
+        <div id="login-section">
+            <h2>MY FERRARI CONFIGURATOR</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email:</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Senha:</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit">Entrar</button>
+            </form>
+            <p class="toggle-form" onclick="toggleAuthMode()">Não tem conta? Cadastre-se</p>
+            <a href="index.html" class="toggle-form" style="display: block; margin-top: 10px; text-decoration: none;">Voltar para a Página Inicial</a>
+        </div>
+
+        <div id="register-section" class="hidden-form">
+            <h2>Cadastre-se</h2>
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="reg-name">Nome:</label>
+                    <input type="text" id="reg-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-email">Email:</label>
+                    <input type="email" id="reg-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-password">Senha:</label>
+                    <input type="password" id="reg-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="reg-phone">Telefone:</label>
+                    <input type="tel" id="reg-phone">
+                </div>
+                <div class="form-group">
+                    <label for="reg-profile-pic">Foto de Perfil (Opcional):</label>
+                    <input type="file" id="reg-profile-pic" accept="image/*">
+                    <img id="profile-pic-preview" class="profile-pic-preview hidden-form" src="" alt="Pré-visualização">
+                </div>
+                <button type="submit">Cadastrar</button>
+            </form>
+            <p class="toggle-form" onclick="toggleAuthMode()">Já tem conta? Faça Login</p>
+        </div>
+    </div>
+
+    <script>
+        // ATENÇÃO: Em um projeto real, isso estaria em 'script.js'
+        //------------------------------------------------------------------
+        // Lógica de Autenticação (Simulada com localStorage)
+        //------------------------------------------------------------------
+
+        const loginSection = document.getElementById('login-section');
+        const registerSection = document.getElementById('register-section');
+        const registerForm = document.getElementById('register-form');
+        const loginForm = document.getElementById('login-form');
+        const profilePicInput = document.getElementById('reg-profile-pic');
+        const profilePicPreview = document.getElementById('profile-pic-preview');
+
+        function toggleAuthMode() {
+            loginSection.classList.toggle('hidden-form');
+            registerSection.classList.toggle('hidden-form');
+        }
+
+        function getUsers() {
+            return JSON.parse(localStorage.getItem('users') || '{}');
+        }
+
+        function saveUser(email, userData) {
+            const users = getUsers();
+            users[email] = userData;
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+
+        // Pré-visualização da foto de perfil
+        profilePicInput.addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    profilePicPreview.src = e.target.result;
+                    profilePicPreview.classList.remove('hidden-form');
+                };
+                reader.readAsDataURL(file);
+            } else {
+                profilePicPreview.classList.add('hidden-form');
+            }
+        });
+
+        // Cadastro
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('reg-name').value;
+            const email = document.getElementById('reg-email').value;
+            const password = document.getElementById('reg-password').value;
+            const phone = document.getElementById('reg-phone').value;
+            const profilePic = profilePicPreview.src || null; // Pega a URL em Base64
+            
+            const users = getUsers();
+            
+            if (users[email]) {
+                alert('Erro: Este email já está cadastrado.');
+                return;
+            }
+            
+            const newUser = {
+                name: name,
+                email: email,
+                password: password, // ATENÇÃO: Senhas NUNCA devem ser salvas em texto puro em produção!
+                phone: phone,
+                profilePic: profilePic,
+                favorites: { cars: [], colors: [] }
+            };
+            
+            saveUser(email, newUser);
+            alert('Cadastro realizado com sucesso! Faça login para continuar.');
+            toggleAuthMode(); // Volta para o login
+            loginForm.reset();
+            registerForm.reset();
+        });
+
+        // Login
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            const users = getUsers();
+            const user = users[email];
+
+            if (user && user.password === password) {
+                localStorage.setItem('loggedInUser', email);
+                alert('Login bem-sucedido! Redirecionando...');
+                window.location.href = 'configurator.html'; // Redireciona para a página inicial
+            } else {
+                alert('Erro: Email ou senha inválidos.');
+            }
+        });
+
+        // Verifica se já está logado e redireciona
+        document.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('loggedInUser')) {
+                window.location.href = 'index.html';
+            }
+        });
+    </script>
+</body>
+</html>

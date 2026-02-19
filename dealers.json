@@ -1,0 +1,156 @@
+[
+  {
+    "nome": "Ferrari São Paulo",
+    "endereco": "Av. Brasil, 1769 – Jardim América, São Paulo, SP, 01431‑001, Brasil",
+    "telefone": "+55 (11) 3087‑0199",
+    "lat": -23.5693,
+    "lng": -46.6670
+  },
+  {
+    "nome": "Ferrari of Seattle",
+    "endereco": "13120 Bel-Red Rd, Bellevue, WA 98005, EUA",
+    "telefone": "+1 (206) 329-7070",
+    "lat": 47.6101,
+    "lng": -122.2015
+  },
+  {
+    "nome": "Ferrari of San Francisco",
+    "endereco": "595 Redwood Hwy, Mill Valley, CA 94941, EUA",
+    "telefone": "+1 (415) 380-9700",
+    "lat": 37.9075,
+    "lng": -122.5260
+  },
+  {
+    "nome": "Ferrari of Fort Lauderdale",
+    "endereco": "5750 N Federal Hwy, Fort Lauderdale, FL 33308, EUA",
+    "telefone": "+1 (954) 715-7500",
+    "lat": 26.1830,
+    "lng": -80.1195
+  },
+  {
+    "nome": "Ferrari of Houston",
+    "endereco": "1530 W Loop N Fwy, Houston, TX 77008, EUA",
+    "telefone": "+1 (713) 772-3868",
+    "lat": 29.7762,
+    "lng": -95.4533
+  },
+  {
+    "nome": "Ferrari of Naples",
+    "endereco": "11291 Tamiami Trail N, Naples, FL 34110, EUA",
+    "telefone": "+1 (239) 256-1400",
+    "lat": 26.2895,
+    "lng": -81.7983
+  },
+  {
+    "nome": "Ferrari of Beverly Hills",
+    "endereco": "8888 W Olympic Blvd, Beverly Hills, CA 90035, EUA",
+    "telefone": "+1 (310) 278-8600",
+    "lat": 34.0696,
+    "lng": -118.4132
+  },
+  {
+    "nome": "Ferrari of Atlanta",
+    "endereco": "1555 Mansell Rd, Roswell, GA 30076, EUA",
+    "telefone": "+1 (770) 645-0000",
+    "lat": 34.0286,
+    "lng": -84.3091
+  },
+  {
+    "nome": "Ferrari of New York",
+    "endereco": "11 W 57th St, New York, NY 10019, EUA",
+    "telefone": "+1 (212) 888-4600",
+    "lat": 40.7638,
+    "lng": -73.9754
+  },
+  {
+    "nome": "Ferrari of Las Vegas",
+    "endereco": "5205 W Sahara Ave, Las Vegas, NV 89146, EUA",
+    "telefone": "+1 (702) 364-1111",
+    "lat": 36.1469,
+    "lng": -115.2061
+  },
+  {
+    "nome": "Ferrari of Vancouver",
+    "endereco": "688 Terminal Ave, Vancouver, BC V6A 2M5, Canadá",
+    "telefone": "+1 (604) 736-5511",
+    "lat": 49.2773,
+    "lng": -123.0997
+  },
+  {
+    "nome": "Ferrari of Ontario",
+    "endereco": "8300 Woodbine Ave, Vaughan, ON L4L 1A5, Canadá",
+    "telefone": "+1 (905) 850-4555",
+    "lat": 43.7941,
+    "lng": -79.5377
+  },
+  {
+    "nome": "Ferrari of Alberta",
+    "endereco": "1515 11 Ave SW, Calgary, AB T3C 0M9, Canadá",
+    "telefone": "+1 (403) 258-5500",
+    "lat": 51.0419,
+    "lng": -114.0715
+  },
+  {
+    "nome": "Ferrari Quebec",
+    "endereco": "1150 Rue Jean‑Baptiste‑Meilleur, Montreal, QC H4N 2C3, Canadá",
+    "telefone": "+1 (514) 334-4444",
+    "lat": 45.5220,
+    "lng": -73.6481
+  },
+  {
+    "nome": "Ferrari Sydney",
+    "endereco": "33-35 O’Riordan St, Alexandria NSW 2015, Austrália",
+    "telefone": "+61 2 9690 8000",
+    "lat": -33.9144,
+    "lng": 151.1915
+  },
+  {
+    "nome": "Ferrari Melbourne",
+    "endereco": "30-32 Bertie St, Port Melbourne VIC 3207, Austrália",
+    "telefone": "+61 3 9645 3200",
+    "lat": -37.8343,
+    "lng": 144.9477
+  },
+  {
+    "nome": "Ferrari Tokyo",
+    "endereco": "2-27-14 Nakaochiai, Shinjuku-ku, Tóquio, 161-0032, Japão",
+    "telefone": "+81 3-3565-6244",
+    "lat": 35.6774,
+    "lng": 139.6800
+  },
+  {
+    "nome": "Ferrari Zurich",
+    "endereco": "Zürcherstrasse 10, 8153 Rümlang, Suíça",
+    "telefone": "+41 44 817 17 17",
+    "lat": 47.4393,
+    "lng": 8.5370
+  },
+  {
+    "nome": "Ferrari Geneva",
+    "endereco": "Route de Meyrin 85, 1217 Genebra, Suíça",
+    "telefone": "+41 22 306 18 18",
+    "lat": 46.2295,
+    "lng": 6.1419
+  },
+  {
+    "nome": "Ferrari Madrid",
+    "endereco": "Calle de José Abascal, 56, 28003 Madrid, Espanha",
+    "telefone": "+34 91 535 55 55",
+    "lat": 40.4373,
+    "lng": -3.6940
+  },
+  {
+    "nome": "Ferrari Barcelona",
+    "endereco": "Carrer de Pau Claris, 108, 08009 Barcelona, Espanha",
+    "telefone": "+34 93 487 88 88",
+    "lat": 41.3912,
+    "lng": 2.1674
+  },
+  {
+    "nome": "Ferrari Maranello",
+    "endereco": "Via Abetone Inferiore, 4, 41053 Maranello (MO), Itália",
+    "telefone": "+39 0536 949111",
+    "lat": 44.5346,
+    "lng": 10.9916
+  }
+]

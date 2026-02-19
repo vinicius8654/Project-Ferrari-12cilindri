@@ -1,0 +1,795 @@
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ferrari</title>
+   <link rel="icon" href="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233746/cavalo-rampante_y8zvtn.ico" type="image/x-icon">
+   <!-- Font Awesome CDN (última versão) -->
+    
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="galeria.css">
+  
+   <style>
+  body.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+body.fade-in {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+  body {
+      background: #1A1A1A;
+      margin: 0;
+      padding: 0;
+    }
+
+    .imagem-interativa {
+      position: relative;
+      width: 100%;
+      height: 110%;
+      max-width: 100%;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .imagem-interativa img {
+      width: 100%;
+       height: 110%;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+  
+    .botao-circulo {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: rgba(255, 255, 255, 0.304);
+      border-radius: 50%;
+      border: 2px solid white;
+      cursor: pointer;
+      transition: transform 0.2s;
+       display: inline-block;
+      animation: pulsar 1.5s infinite ease-in-out;
+      z-index: 5;
+        box-shadow: 0 0 8px white;
+    }
+
+    .botao-circulo:hover {
+      transform: scale(1.1);
+    }
+
+    /* Posicionamentos (valores ajustáveis) */
+    .btn1 {top: 45%; left: 26%; }
+    .btn2 { top: 55%; left: 47%; }
+    .btn3 { top: 45%; left: 55%; }
+    .btn4 { top: 53%; left: 10%; }
+    .btn5 { top: 72%; left: 47%; }
+    .btn6 { top: 60%; left: 90%; } 
+    .btn7 { top: 45%; left: 89%; }
+    @keyframes pulsar {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+}
+
+/* Tooltip visível ao passar o mouse */
+.botao-circulo .tooltip {
+  font-family: 'Arial', sans-serif;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ff000000;
+  color: white;
+  margin-top: 6px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+  z-index: 6;
+  pointer-events: none;
+}
+
+/* Mostrar tooltip ao passar o mouse */
+.botao-circulo:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+    .imagem-interativa video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 110%;
+  object-fit: cover;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+.imagem-interativa2 video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+
+</style>
+</head>
+
+<body>
+
+
+<!--HEADER-->
+
+  <header class="header">
+    <div class="logo">
+      <a href="index.html"><img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233739/cavalo_rampante_raid9g.png" alt="Logo" /></a>
+    </div>
+    <nav class="nav">
+      <ul class="nav-menu">
+        <li><a href="https://www.ferrari.com/en-EN/formula1">RACING</a></li>
+        <li><a href="configurator.html">SPORTS CARS</a></li>
+        <li><a href="https://store.ferrari.com/en-br/replica/replica-scuderia-ferrari/?_gl=1*1q3x63r*_gcl_au*MTU5MDEwMzYzOC4xNzU2NDIxNDYz*_ga*MzQ5NTQ2MjIuMTc1MzgyOTMzMw..*_ga_JM1HT9B412*czE3NTc1MjkxNTkkbzQwJGcxJHQxNzU3NTI5NDAxJGozNCRsMCRoMTQzNjI3MzE2OA..&from=GW_superheader&page=3">COLLECTIONS</a></li>
+        <li><a href="https://www.ferrari.com/en-EN/museums">EXPERIENCES</a></li>
+        <li><a href="https://www.ferrari.com/en-EN/news">ABOUT US</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+<!-- BANNER INICIAL-->
+
+  <section id="section1" class="section1">
+    <div>
+        <img class="cill" src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233733/12cillindri_eby75k.png" alt="">
+        <nav class="nav-configurator">
+          <ul class="nav-menu-configurator">
+            <li><a href="3dmodel.html">CONFIGURATOR</a></li>
+            <li><a href="enquire.html">ENQUIRE</a></li>
+                   <li>
+          <button id="btnCompartilhar" class="share-button">
+            <i class="fa fa-share"></i>
+          </button>
+        </li>
+
+          </ul>
+        </nav>
+   <video autoplay muted loop playsinline class="video">
+    <source src="https://res.cloudinary.com/dmxgurkfj/video/upload/v1760651338/URXMO7_ferrari-12cilindri-official-video_P35EMJ_pnhejx.mp4" type="video/webm" />
+    Seu navegador não suporta o formato de vídeo.</video>
+    </div>
+
+
+
+
+      <aside id="menuLateral" class="menu-lateral">
+    <div class="menu-conteudo">
+      <button id="btnFechar" class="fechar">&times;</button>
+      <h3>SHARE</h3>
+      <div class="social-links">
+        <a href="http://www.facebook.com/share.php?u=https%3A%2F%2Fwww.ferrari.com%2Fen-EN%2Fauto%2Fferrari-12cilindri%2Fshare%2Fengine-throttle&t=" class="facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
+        <a href="https://www.linkedin.com/feed/?linkOrigin=LI_BADGE&shareActive=true&shareUrl=https%3A%2F%2Fwww.ferrari.com%2Fen-EN%2Fauto%2Fferrari-12cilindri%2Fshare%2Fengine-throttle" class="linkedin"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+        <a href="#" class="X"><i class="fa fa-link"></i> X</a>
+                <a href="#" class="link"><i class="fa fa-link"></i> URL</a>
+      </div>
+    </div>
+  </aside>
+
+
+  
+ </section>
+
+<!-- SEÇÃO 1 - MOTOR-->
+
+<section id="section2" class="section2">
+ <a href="indexm.html"><video autoplay muted loop playsinline class="video2">
+   <source src="https://res.cloudinary.com/dmxgurkfj/video/upload/v1756233993/motor_iiywqs.mp4" type="video/mp4"/>
+  </video>
+  </a>
+   <div class="marcador-pagina">
+  <span class="numero">1</span>
+  <span class="linha"></span>
+  <span class="titulo">TREM DE FORÇA</span>
+</div>
+      <button id="botaoPower" class="botao-audio">
+    <i class="fa fa-power-off"></i>
+  </button>
+  <audio id="audioMotor" src="https://res.cloudinary.com/dmxgurkfj/video/upload/v1756253106/audio_motor_sf4wrv.mp3"></audio>
+</section>
+
+
+<!--INFOS-->
+
+<section id="section3" class="section3">
+  <div class="info-box">
+    <h3>CO2 Emission:</h3>
+    <p>LOW: 618 G/KM</p>
+    <p>MID: 356 G/KM</p>
+    <p>HIGH: 302 G/KM</p>
+    <p>EXTRA HIGH: 296 G/KM</p>
+    <p>COMBINED: 353 G/KM</p>
+  </div>
+
+  <div class="info-box">
+    <h3>Fuel Consumption:</h3>
+    <p>LOW: 27.2 L/100KM</p>
+    <p>MID: 15.7 L/100KM</p>
+    <p>HIGH: 13.3 L/100KM</p>
+    <p>EXTRA HIGH: 13.1 L/100KM</p>
+    <p>COMBINED: 15.5 L/100KM</p>
+  </div>
+
+  <div class="info-text">
+    <p>
+      The values of fuel consumptions and CO2 emissions shown were determined 
+      according to the European Regulation (EC) 715/2007 in the version applicable 
+      at the time of type approval. The fuel consumption and CO2 emission figures 
+      refer to the WLTP cycle.
+    </p>
+    <a href="indexh.html" class="read-more">READ MORE</a>
+  </div>
+</section>
+
+<!--SEÇÃO 2 - PROJETO-->
+
+<section id="section4" class="sectionsection4">
+  
+  <div class="raiox-container">
+    <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233736/12cillindriwhite_gcgupb.avif" alt="Carro Exterior" class="imagem-exterior">
+    <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233735/12cillindrirossocorsa_yv479o.avif" alt="Carro Interno" class="imagem-interna">
+      <div class="marcador-pagina">
+  <span class="numero">2</span>
+  <span class="linha"></span>
+  <span class="titulo">PROJETO</span>
+</div>
+    <div class="anel"></div>
+  </div>
+ 
+</section>
+
+<!--SEÇÃO 3 - INTERIOR-->
+
+<section>
+<div class="imagem-interativa">
+   <div class="marcador-pagina">
+  <span class="numero">3</span>
+  <span class="linha"></span>
+  <span class="titulo">INTERIOR</span>
+</div>
+
+<div class="imagem-interativa2">
+  <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233741/interior_zqfazy.avif" alt="Aerodinamicas">
+  <!-- Vídeo por cima -->
+
+  <video id="videoIntro2" autoplay muted playsinline>
+    <source src="https://res.cloudinary.com/dmxgurkfj/video/upload/v1756234023/INTERIOR_video_dlwoto.mp4" type="video/mp4">
+    Seu navegador não suporta vídeo HTML5.
+  </video>
+  
+  <!-- Botões clicáveis que redirecionam -->
+  <a href="sterringwheel.html" class="botao-circulo btn1" title="">
+      <span class="tooltip">STERRING WHEEL</span>
+  </a>
+  <a href="humanmachineinteface.html" class="botao-circulo btn2" title="">
+      <span class="tooltip">HUMAN MACHINE INTERFACE</span>
+  </a>
+  <a href="dualcockpit.html" class="botao-circulo btn3" title="">
+      <span class="tooltip">DUAL COCKPIT</span>
+  </a>
+</div>
+
+</section>
+
+
+<!--SEÇÃO 4 - CHASSI E BWI -->
+
+<section id="section4" class="sectionsection4">
+  
+  <div class="raiox-container">
+    <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233744/rosso_rt0d8u.avif" alt="Carro Exterior" class="imagem-exterior">
+    <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233738/carenagem_v9j4yx.avif" alt="Carro Interno" class="imagem-interna">
+     <div class="marcador-pagina">
+  <span class="numero">4</span>
+  <span class="linha"></span>
+  <span class="titulo">CHASSI E BWI</span>
+</div>
+    <div class="anel"></div>
+  </div>
+</section>
+
+
+<!--SEÇÃO 6 - AERODINAMICA -->
+
+<div class="imagem-interativa">
+  <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233742/ponto_jz4uxz.avif" alt="Aerodinamicas">
+  <!-- Vídeo por cima -->
+
+  <video id="videoIntro" autoplay muted playsinline>
+    <source src="https://res.cloudinary.com/dmxgurkfj/video/upload/v1756234025/aerodinamic_r616cm.mp4" type="video/mp4">
+    Seu navegador não suporta vídeo HTML5.
+  </video>
+  <div class="marcador-pagina">
+  <span class="numero">5</span>
+  <span class="linha"></span>
+  <span class="titulo">AERODINÂMICA</span>
+</div>
+
+  <!-- Botões clicáveis que redirecionam -->
+  <a href="coolinglayout.html" class="botao-circulo btn4" title="">
+      <span class="tooltip">COOLING LAYOUT</span>
+  </a>
+  <a href="Downforcetroughunderbody.html" class="botao-circulo btn5" title="">
+      <span class="tooltip">DOWNFORCE TROUGH THE<br>UNDERBODY</span>
+  </a>
+  <a href="extractor.html" class="botao-circulo btn6" title="">
+      <span class="tooltip">EXTRACTOR</span>
+  </a>
+  <a href="theaerodynamickickin.html" class="botao-circulo btn7" title="">
+      <span class="tooltip">THE<br> AERODYNAMICS<br> KICK IN</span>
+  </a>
+</div>
+
+<!--SEÇÃO 7 - INFORMAÇÕES TÉCNICAS -->
+<section>
+<a href="indexl.html">
+<div class="imagem-interativa">
+  <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233727/motor_spec_juylio.avif" alt="Aerodinamicas">
+  <!-- Vídeo por cima -->
+
+  <video id="videoIntro" autoplay muted playsinline>
+    <source src="https://res.cloudinary.com/dmxgurkfj/video/upload/v1756234027/detalhes_tecnicos_video_fbdpen.mp4" type="video/mp4">
+    Seu navegador não suporta vídeo HTML5.
+  </video>
+  </a>
+   <div class="marcador-pagina">
+  <span class="numero">6</span>
+  <span class="linha"></span>
+  <span class="titulo">DETALHES TÉCNICOS</span>
+</div>
+</section>
+
+<!--VIDEO NORMAL-->
+
+<section>
+  <video autoplay muted loop playsinline class="video">
+    <source src="https://res.cloudinary.com/dmxgurkfj/video/upload/v1756234042/yt1z.net_-_Ferrari_12Cilindri_Turning_up_the_adrenaline_in_Croatia_1080p_online-video-cutter.com_qrnxcv.mp4" type="video/webm" />
+    Seu navegador não suporta o formato de vídeo.</video>
+</section>
+
+<!--GALERIA-->
+<section>
+    <div class="tabs">
+    <div class="tab active" onclick="switchTab('album-section')">PHOTOS</div>
+    <div class="tab" onclick="switchTab('videos')">VIDEOS</div>
+  </div>
+  
+
+  <!-- Seção de Álbuns -->
+  <div id="album-section" class="gallery active">
+    <div class="album" onclick="openAlbum('album1')">
+      <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233900/2models_lwrvlr.jpg" alt="Álbum 1">
+      <p>FERRARI 12CILINDRI BIANCO ARTICO </p>
+    </div>
+    <div class="album" onclick="openAlbum('album2')">
+      <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233911/rossoimola_xxqf5r.jpg" alt="Álbum 2">
+      <p>FERRARI 12CILINDRI ROSSO IMOLA</p>
+    </div>
+    <div class="album" onclick="openAlbum('album3')">
+      <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233933/biancoarticostudio_dpzd19.jpg" alt="Álbum 2">
+      <p>FERRARI 12CILINDRI BIANCO ARTICO <br> STUDIO</p>
+    </div>
+    <div class="album" onclick="openAlbum('album4')">
+      <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233931/interior_aqly98.jpg" alt="Álbum 4">
+      <p>FERRARI 12CILINDRI INTERIOR</p>
+    </div>
+  </div>
+
+  <!-- Álbum 1 -->
+  <div id="album1" class="gallery hidden">
+  
+    <button class="back-btn" onclick="closeAlbum()">← Voltar aos álbuns</button>
+    <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233900/2models_lwrvlr.jpg" alt="Ferrari" onclick="openModal(this.src)">
+    <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233902/white_ztnlld.jpg" alt="Ferrari" onclick="openModal(this.src)">
+    <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233909/white2_ahxvnc.jpg" alt="Ferrari" onclick="openModal(this.src)">
+    <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233907/white3_u7q3rv.jpg" alt="Ferrari" onclick="openModal(this.src)">
+    <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233893/white4_dtdn2j.jpg" alt="Ferrari" onclick="openModal(this.src)">
+  </div>
+
+  <!-- Álbum 2 -->
+  <div id="album2" class="gallery hidden">
+    <button class="back-btn" onclick="closeAlbum()">← Voltar aos álbuns</button>
+    <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233911/rossoimola_xxqf5r.jpg" alt="Ferrari" onclick="openModal(this.src)">
+    <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233889/rossoimola2_tbdlor.jpg" alt="Ferrari" onclick="openModal(this.src)">
+    <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233895/rossoimola3_fgmrnp.jpg" alt="Ferrari" onclick="openModal(this.src)">
+    <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233897/rossoimola4_e8lc1y.jpg" alt="Ferrari" onclick="openModal(this.src)">
+    <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233888/rossoimola5_uw94jm.jpg" alt="Ferrari" onclick="openModal(this.src)">
+    <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233938/rossoimola6_rchtgt.jpg" alt="Ferrari" onclick="openModal(this.src)">
+    <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233935/rossoimola7_exra8o.jpg" alt="Ferrari" onclick="openModal(this.src)">
+  </div>
+
+    <!-- Álbum 3 -->
+  <div id="album3" class="gallery hidden">
+    <button class="back-btn" onclick="closeAlbum()">← Voltar aos álbuns</button>
+    <img src="imagens galeria/biancoarticostudio.jpg" alt="Ferrari" onclick="openModal(this.src)">
+    <img src="imagens galeria/biancoarticostudio2.jpg" alt="Ferrari" onclick="openModal(this.src)">
+    <img src="imagens galeria/biancoarticostudio3.jpg" alt="Ferrari" onclick="openModal(this.src)">
+    <img src="imagens galeria/biancoarticostudio4.jpg" alt="Ferrari" onclick="openModal(this.src)">
+    <img src="imagens galeria/biancoarticostudio5.jpg" alt="Ferrari" onclick="openModal(this.src)">
+    <img src="imagens galeria/biancoarticostudio6.jpg" alt="Ferrari" onclick="openModal(this.src)">
+  </div>
+
+      <!-- Álbum 4 -->
+  <div id="album4" class="gallery hidden">
+    <button class="back-btn" onclick="closeAlbum()">← Voltar aos álbuns</button>
+    <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233931/interior_aqly98.jpg" alt="Ferrari" onclick="openModal(this.src)">
+    <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233928/interior2_qgkekg.jpg" alt="Ferrari" onclick="openModal(this.src)">
+    <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233926/interior3_sewkxv.jpg" alt="Ferrari" onclick="openModal(this.src)">
+    <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233904/interior4_evxnjt.jpg" alt="Ferrari" onclick="openModal(this.src)">
+  </div>
+
+  <!-- Vídeos -->
+<div id="videos" class="gallery">
+  <div class="album" onclick="openVideoAlbum('albumVideos1')">
+    <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233933/biancoarticostudio_dpzd19.jpg" alt="Capa do vídeo 1">
+    <p>FERRARI 12CILINDRI</p>
+  </div>
+  <div class="album" onclick="openVideoAlbum('albumVideos2')">
+    <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233889/rossoimola2_tbdlor.jpg" alt="Capa do vídeo 2">
+    <p>TEST DRIVE OFICIAL</p>
+  </div>
+</div>
+
+<!-- Álbum de Vídeos 1 -->
+<div id="albumVideos1" class="gallery hidden">
+  <button class="back-btn" onclick="closeVideoAlbum()">← Voltar aos vídeos</button>
+  <video controls>
+    <source src="https://res.cloudinary.com/dmxgurkfj/video/upload/v1760651338/URXMO7_ferrari-12cilindri-official-video_P35EMJ_pnhejx.mp4" type="video/mp4">
+    Seu navegador não suporta vídeos.
+  </video>
+</div>
+
+<!-- Álbum de Vídeos 2 -->
+<div id="albumVideos2" class="gallery hidden">
+  <button class="back-btn" onclick="closeVideoAlbum()">← Voltar aos vídeos</button>
+  <video controls>
+    <source src="https://res.cloudinary.com/dmxgurkfj/video/upload/v1756234051/yt1z.net_-_Ferrari_12Cilindri_Turning_up_the_adrenaline_in_Croatia_1080p_o2s11m.mp4" type="video/mp4">
+    Seu navegador não suporta vídeos.
+  </video>
+</div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal" onclick="closeModal()">
+    <img id="modal-img" src="" alt="modal">
+  </div>
+
+</section>
+
+<section class="section-spider">
+  <div class="spider-banner">
+    <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233711/spyder_vqlqs8.jpg" alt="Ferrari 12Cilindri Spider">
+    <div class="spider-texto">
+      <h2>Ferrari 12Cilindri Spider</h2>
+      <a href="https://www.ferrari.com/en-EN/auto/ferrari-12cilindri-spider" class="botao-descobrir">DESCOBRIR <span>→</span></a>
+    </div>
+  </div>
+</section>
+
+<section>
+   <h1>Concessionárias Ferrari</h1>
+  <div id="map"></div>
+
+  <!-- JS do Leaflet -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+</section>
+
+<!-- Importa o JS no fim do body -->
+
+
+<footer style="background-color: #111; padding: 40px 20px 20px;">
+  <div class="footer-links" style="display: flex; flex-wrap: wrap; justify-content: space-around; max-width: 1200px; margin: auto;">
+    
+    <div>
+      <h4 style="color: white; margin-bottom: 10px;">CARROS ESPORTIVOS</h4>
+      <ul style="list-style: none; padding: 0;">
+        <li>Configure sua Ferrari</li>
+        <li>MinhaFerrari</li>
+        <li>Concessionários</li>
+        <li>Informações de recall</li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 style="color: white; margin-bottom: 10px;">COLEÇÕES</h4>
+      <ul style="list-style: none; padding: 0;">
+        <li>Moda</li>
+        <li>Relógios</li>
+        <li>Colecionáveis</li>
+        <li>Seleção Scuderia Ferrari</li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 style="color: white; margin-bottom: 10px;">EXPERIÊNCIAS</h4>
+      <ul style="list-style: none; padding: 0;">
+        <li>eSports da Ferrari</li>
+        <li>Restaurante Cavallino</li>
+        <li>Museus Ferrari</li>
+        <li>Ferrari World Abu Dhabi</li>
+      </ul>
+    </div>
+
+    <div>
+      <h4 style="color: white; margin-bottom: 10px;">SOBRE NÓS</h4>
+      <ul style="list-style: none; padding: 0;">
+        <li>Sustentabilidade</li>
+        <li>Centro de Mídia</li>
+        <li>Notícias</li>
+        <li>Revista</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="social-icons">
+    <a href="#"><i ></i> Facebook</a>
+    <a href="#"><i ></i> Instagram</a>
+    <a href="#"><i ></i> Twitter</a>
+    <a href="#"><i ></i> YouTube</a>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 Ferrari S.p.A. Todos os direitos reservados. | Política de Privacidade | Termos de Uso</p>
+  </div>
+</footer>
+
+<script>
+
+  // Mapa com scroll desativado por padrão
+    const map = L.map('map', { scrollWheelZoom: false }).setView([20, 0], 2);
+
+    // Camada base
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Ícone vermelho
+    const redIcon = L.icon({
+      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+      shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41]
+    });
+
+    // Ativar/desativar zoom via eventos do container (mais confiável)
+    const mapEl = map.getContainer();
+    mapEl.addEventListener('click', () => map.scrollWheelZoom.enable());
+    mapEl.addEventListener('mouseleave', () => map.scrollWheelZoom.disable());
+
+    // Carregar JSON (rodar com servidor: http://..., não file://)
+    fetch('dealers.json')
+      .then(r => {
+        if (!r.ok) throw new Error('Não foi possível carregar dealers.json');
+        return r.json();
+      })
+      .then(dealers => {
+        dealers.forEach(d => {
+          L.marker([d.lat, d.lng], { icon: redIcon })
+            .addTo(map)
+            .bindPopup(`<b>${d.nome}</b><br>${d.endereco ?? ''}`);
+        });
+      })
+      .catch(err => {
+        console.warn('Falha ao carregar dealers.json. Rode com Live Server ou verifique o caminho do arquivo.', err);
+        // Fallback mínimo para você ver algo no mapa:
+        const fallback = [
+          { nome: 'Ferrari São Paulo', lat: -23.5693, lng: -46.6670, endereco: 'Av. Brasil, 1769 – Jardim América, São Paulo' }
+        ];
+        fallback.forEach(d => {
+          L.marker([d.lat, d.lng], { icon: redIcon })
+            .addTo(map)
+            .bindPopup(`<b>${d.nome}</b><br>${d.endereco ?? ''}`);
+        });
+      });
+
+document.getElementById("btnCompartilhar").addEventListener("click", () => {
+  document.getElementById("menuLateral").classList.add("ativo");
+});
+
+document.getElementById("btnFechar").addEventListener("click", () => {
+  document.getElementById("menuLateral").classList.remove("ativo");
+});
+
+let lastScrollTop = 0;
+
+window.addEventListener("scroll", () => {
+  const current = Math.max(window.scrollY, 0);
+
+  if (current > lastScrollTop && current > 100) { // Só esconde após 100px
+    document.body.classList.add("scrolled");
+  } else {
+    document.body.classList.remove("scrolled");
+  }
+
+  lastScrollTop = current;
+});
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      requestAnimationFrame(() => {
+        entry.target.classList.add('show');
+      });
+    }
+  });
+}, {
+  threshold: 0.1
+});
+
+const botao = document.getElementById("botaoPower");
+const audio = document.getElementById("audioMotor");
+
+botao.addEventListener("click", () => {
+  if (audio.paused) {
+    audio.currentTime = 0;
+    audio.play();
+  } else {
+    audio.pause();
+  }
+});
+
+  const video = document.getElementById('videoIntro');
+
+  video.addEventListener('ended', () => {
+    video.style.opacity = '0';
+  });
+
+document.querySelectorAll('.raiox-container').forEach(container => {
+  const imagemInterna = container.querySelector('.imagem-interna');
+  const anel = container.querySelector('.anel');
+
+  container.addEventListener('mousemove', (e) => {
+    const rect = container.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    imagemInterna.style.clipPath = `circle(150px at ${x}px ${y}px)`;
+    anel.style.left = `${x - 150}px`;
+    anel.style.top = `${y - 150}px`;
+  });
+});
+
+    container.addEventListener('mousemove', (e) => {
+      const x = e.offsetX;
+      const y = e.offsetY;
+      imagemInterna.style.clipPath = `circle(150px at ${x}px ${y}px)`;
+      anel.style.left = `${x - 150}px`;
+      anel.style.top = `${y - 150}px`;
+    });
+
+// Aplica fade-in ao carregar
+  document.body.classList.add('fade-out');
+  window.addEventListener('DOMContentLoaded', () => {
+    requestAnimationFrame(() => {
+      document.body.classList.remove('fade-out');
+      document.body.classList.add('fade-in');
+    });
+  });
+
+  // Adiciona fade-out antes de ir para a próxima página
+  document.querySelectorAll('a').forEach(link => {
+    // Só faz para links internos
+    if (link.hostname === window.location.hostname) {
+      link.addEventListener('click', function (e) {
+        const href = link.getAttribute('href');
+
+        // ignora links com target="_blank" ou âncoras
+        if (
+          href.startsWith('#') ||
+          link.target === '_blank'
+        ) return;
+
+        e.preventDefault();
+        document.body.classList.remove('fade-in');
+        document.body.classList.add('fade-out');
+
+        setTimeout(() => {
+          window.location.href = href;
+        }, 500); // deve ser igual ao tempo do CSS
+      });
+    }
+  });
+
+function switchTab(tabName) {
+  document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+  document.querySelectorAll('.gallery').forEach(gallery => {
+    gallery.classList.remove('active');
+    gallery.classList.add('hidden');
+  });
+
+  document.querySelector(`.tab[onclick*="${tabName}"]`).classList.add('active');
+  document.getElementById(tabName).classList.add('active');
+  document.getElementById(tabName).classList.remove('hidden');
+
+  if (tabName === 'album-section') closeAlbum();
+  if (tabName === 'videos') closeVideoAlbum(); // ← aqui
+}
+
+  function openAlbum(albumId) {
+    document.getElementById('album-section').classList.add('hidden');
+    document.getElementById(albumId).classList.remove('hidden');
+    document.getElementById(albumId).classList.add('active');
+  }
+
+  function closeAlbum() {
+    document.getElementById('album-section').classList.remove('hidden');
+    document.querySelectorAll('.gallery').forEach(gallery => {
+      if (gallery.id.startsWith('album') && gallery.id !== 'album-section') {
+        gallery.classList.add('hidden');
+        gallery.classList.remove('active');
+      }
+    });
+  }
+
+  function openVideoAlbum(albumId) {
+  document.getElementById('videos').classList.add('hidden');
+  document.getElementById(albumId).classList.remove('hidden');
+  document.getElementById(albumId).classList.add('active');
+}
+
+function closeVideoAlbum() {
+  document.getElementById('videos').classList.remove('hidden');
+  document.querySelectorAll('.gallery').forEach(gallery => {
+    if (gallery.id.startsWith('albumVideos') && gallery.id !== 'videos') {
+      gallery.classList.add('hidden');
+      gallery.classList.remove('active');
+    }
+  });
+}
+
+  function openModal(src) {
+    const modal = document.getElementById('modal');
+    const modalImg = document.getElementById('modal-img');
+    modalImg.src = src;
+    modal.classList.add('active');
+  }
+
+  function closeModal() {
+    const modal = document.getElementById('modal');
+    modal.classList.remove('active');
+  }
+
+
+
+
+
+</script>
+</body>
+
+</html>

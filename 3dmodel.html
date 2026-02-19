@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <title>Ferrari 12 cilindri Vizualizer</title>
+  <link rel="stylesheet" href="css/style.css" />
+         <link rel="icon" href="img/icos/cavalo-rampante.ico" type="image/x-icon">
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <link rel='stylesheet' type='text/css' media='screen' href='configurator.css'>
+            <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+</head>
+<style>
+  body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: #1a1a1a;
+  color: white;
+  overflow-x: hidden;
+}
+.painel {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 34%;
+  height: 100vh;
+  background-color: #2a2a2a;
+  padding: 60px 40px;
+  box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+  transition: right 0.8s ease;
+  z-index: 999;
+}
+
+.painel.ativo {
+  right: 0;
+}
+
+.painel h2 {
+  font-size:18px;
+  margin-bottom: 30px;
+  line-height: 1.2;
+  text-shadow: #1a1a1a;
+}
+
+
+</style>
+<body>
+  <body>
+    <header class="header">
+    <div class="logo">
+<a href="index.html"><img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233739/cavalo_rampante_raid9g.png" alt="Logo" /></a>
+    </div>
+    <nav class="nav">
+      <ul class="nav-menu">
+        <li><a href="https://www.ferrari.com/en-EN/formula1">RACING</a></li>
+        <li><a href="configurator.html">SPORTS CARS</a></li>
+        <li><a href="https://store.ferrari.com/en-br/replica/replica-scuderia-ferrari/?_gl=1*1q3x63r*_gcl_au*MTU5MDEwMzYzOC4xNzU2NDIxNDYz*_ga*MzQ5NTQ2MjIuMTc1MzgyOTMzMw..*_ga_JM1HT9B412*czE3NTc1MjkxNTkkbzQwJGcxJHQxNzU3NTI5NDAxJGozNCRsMCRoMTQzNjI3MzE2OA..&from=GW_superheader&page=3">COLLECTIONS</a></li>
+        <li><a href="https://www.ferrari.com/en-EN/museums">EXPERIENCES</a></li>
+        <li><a href="https://www.ferrari.com/en-EN/news">ABOUT US</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="painel">
+    <h2>FERRARI 12 CILINDRI VISUALIZER</h2>
+<div id="colorButtons" style="position:absolute; top:16%; left:40px; z-index:30; display:grid; gap:7px; font-size: 10px;">
+  </div>
+
+  <a href="index.html" class="btn-fechar">
+  <span class="icon">×</span>
+  Fechar
+</a>
+</div>
+  <div id="ui-top">
+    <button id="btn-reset" style="position:absolute; top:30px; left:0px; z-index:30; display:flex; gap:10px; border-radius: 30px;">RESET</button>
+    <button id="btn-screenshot" style="position:absolute; top:30px; left:70px; z-index:31; display:flex; gap:10px; border-radius: 30px">SCREENSHOT</button>
+    <button id="btn-painel" style="position:absolute; top:30px; left:190px; z-index:29; display:flex; gap:10px; border-radius: 30px;">PAINEL</button>
+  </div>
+
+  <div id="container3D"></div>
+  
+</div>
+
+  <!-- masc: lil-gui para controles -->
+  <script type="module" src="js/main.js"></script>
+  <script>
+ const painel = document.querySelector(".painel");
+  const btnPainel = document.getElementById("btn-painel");
+
+  // Alterna entre abrir e fechar
+  btnPainel.addEventListener("click", () => {
+    painel.classList.toggle("ativo");
+
+    if (painel.classList.contains("ativo")) {
+      btnPainel.textContent = "Fechar Painel";
+    } else {
+      btnPainel.textContent = "Abrir Painel";
+    }
+  });
+
+   window.addEventListener("load", () => {
+      document.querySelector(".painel").classList.add("ativo");
+    });
+  </script>
+</body>
+</html>

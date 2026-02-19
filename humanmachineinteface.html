@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>HUMAN MACHINE INTERFACE</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+    <script src='main.js'></script>
+</head>
+<style>
+      body.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+body.fade-in {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+body {
+      background: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+.imagem-interativa2 {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+.imagem-interativa2 img {
+      width: 100%;
+       height: 100%;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+.imagem-interativa video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+.imagem-interativa2 video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+.btn-voltar {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+}
+
+.btn-voltar .circulo {
+  background: white;
+  color: black;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 24px;
+  text-align: center;
+  line-height: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn-voltar .texto {
+  color: white;
+  font-size: 18px;
+  margin-left: 10px;
+  font-weight: bold;
+  text-shadow: 0 0 3px black;
+}
+
+.btn-voltar:hover .circulo {
+  background: #ddd;
+}
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: #1a1a1a;
+  color: white;
+  overflow-x: hidden;
+}
+
+.painel {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 50%;
+  height: 100vh;
+  background-color: #2a2a2a;
+  padding: 60px 40px;
+  box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+  transition: right 0.8s ease;
+  z-index: 9999;
+}
+
+.painel.ativo {
+  right: 0;
+}
+
+.painel h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.painel p {
+  font-size: 1em;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+</style>
+<body>
+     <section id="section1" class="section1">
+    <div>
+        <img class="cill" src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233733/12cillindri_eby75k.png" alt="">
+        <nav class="nav-configurator">
+          <ul class="nav-menu-configurator">
+            <li><a href="https://carconfigurator.ferrari.com/en_EN/ferrari_car_configurator/12cilindri?_gl=1*9dzzbn*_ga*MzQ5NTQ2MjIuMTc1MzgyOTMzMw..*_ga_JM1HT9B412*czE3NTM5OTMzNjEkbzkkZzEkdDE3NTM5OTQwOTAkajYwJGwwJGgxMDA4MTI5NDQ0">CONFIGURATOR</a></li>
+            <li><a href="http://127.0.0.1:3000/projeto-web/index.html#">ENQUIRE</a></li>
+            <li><a href="http://127.0.0.1:3000/projeto-web/index.html"><i class="fa fa-share"></i></a></li>
+          </ul>
+        </nav>
+    </section>
+    <header class="header">
+    <div class="logo">
+      <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233739/cavalo_rampante_raid9g.png" alt="Logo" />
+    </div>
+    <nav class="nav">
+   <ul class="nav-menu">
+        <li><a href="https://www.ferrari.com/en-EN/formula1">RACING</a></li>
+        <li><a href="configurator.html">SPORTS CARS</a></li>
+        <li><a href="https://store.ferrari.com/en-br/replica/replica-scuderia-ferrari/?_gl=1*1q3x63r*_gcl_au*MTU5MDEwMzYzOC4xNzU2NDIxNDYz*_ga*MzQ5NTQ2MjIuMTc1MzgyOTMzMw..*_ga_JM1HT9B412*czE3NTc1MjkxNTkkbzQwJGcxJHQxNzU3NTI5NDAxJGozNCRsMCRoMTQzNjI3MzE2OA..&from=GW_superheader&page=3">COLLECTIONS</a></li>
+        <li><a href="https://www.ferrari.com/en-EN/museums">EXPERIENCES</a></li>
+        <li><a href="https://www.ferrari.com/en-EN/news">ABOUT US</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+        <div class="imagem-interativa2">
+  <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233725/machine_gl82wc.avif" alt="Aerodinamicas">
+  <!-- Vídeo por cima -->
+
+  <video id="videoIntro2" autoplay muted playsinline>
+    <source src="https://res.cloudinary.com/dmxgurkfj/video/upload/v1756234018/human_online-video-cutter.com_xnawcu.mp4" type="video/mp4">
+    Seu navegador não suporta vídeo HTML5.
+  </video>
+  <div class="painel">
+    <h2>HUMAN MACHINE INTERFACE</h2>
+    <p>
+      O Ferrari 12Cilindri apresenta uma nova Interface Homem-Máquina (IHM) composta por três monitores que elevam a experiência a bordo da Ferrari 12Cilindri a novos patamares.
+    </p>
+    <p>
+      Todas as funções principais podem ser controladas a partir do visor central capacitivo touchscreen de 10,25", acessível tanto ao motorista quanto ao passageiro. Este é ladeado por um visor do motorista de 15,6", que exibe todas as informações de direção e dinâmica do veículo.
+    </p>
+    <p>
+      Por fim, o passageiro está sempre completamente envolvido na experiência de condução graças a um ecrã de 8,8".
+    </p>
+  </div>
+<button class="btn-voltar" onclick="voltarPagina()">
+  <span class="circulo">
+    &times;
+  </span>
+  <span class="texto">Fechar</span>
+</button>
+
+    <script>
+        const video = document.getElementById('videoIntro2');
+
+  video.addEventListener('ended', () => {
+    video.style.opacity = '0';
+  });
+    function voltarPagina() {
+    window.history.back();
+  }
+   window.addEventListener("load", () => {
+      document.querySelector(".painel").classList.add("ativo");
+    });
+    </script>
+
+</body>
+</html>

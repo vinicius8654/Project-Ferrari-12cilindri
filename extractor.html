@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>EXTRACTOR</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='style.css'>
+    <script src='main.js'></script>
+</head>
+<style>
+      body.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+body.fade-in {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+body {
+      background: #000;
+      margin: 0;
+      padding: 0;
+    }
+
+.imagem-interativa2 {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      max-width: 100%;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+.imagem-interativa2 img {
+      width: 100%;
+       height: 100%;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+.imagem-interativa video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+.imagem-interativa2 video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+.btn-voltar {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+}
+
+.btn-voltar .circulo {
+  background: white;
+  color: black;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-size: 24px;
+  text-align: center;
+  line-height: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn-voltar .texto {
+  color: white;
+  font-size: 18px;
+  margin-left: 10px;
+  font-weight: bold;
+  text-shadow: 0 0 3px black;
+}
+
+.btn-voltar:hover .circulo {
+  background: #ddd;
+}
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: #1a1a1a;
+  color: white;
+  overflow-x: hidden;
+}
+
+.painel {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 40%;
+  height: 100vh;
+  background-color: #2a2a2a;
+  padding: 60px 40px;
+  box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+  transition: right 0.8s ease;
+  z-index: 9999;
+}
+
+.painel.ativo {
+  right: 0;
+}
+
+.painel h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.painel p {
+  font-size: 1em;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+</style>
+<body>
+     <section id="section1" class="section1">
+    <div>
+        <img class="cill" src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233733/12cillindri_eby75k.png" alt="">
+        <nav class="nav-configurator">
+          <ul class="nav-menu-configurator">
+            <li><a href="https://carconfigurator.ferrari.com/en_EN/ferrari_car_configurator/12cilindri?_gl=1*9dzzbn*_ga*MzQ5NTQ2MjIuMTc1MzgyOTMzMw..*_ga_JM1HT9B412*czE3NTM5OTMzNjEkbzkkZzEkdDE3NTM5OTQwOTAkajYwJGwwJGgxMDA4MTI5NDQ0">CONFIGURATOR</a></li>
+            <li><a href="http://127.0.0.1:3000/projeto-web/index.html#">ENQUIRE</a></li>
+            <li><a href="http://127.0.0.1:3000/projeto-web/index.html"><i class="fa fa-share"></i></a></li>
+          </ul>
+        </nav>
+    </section>
+    <header class="header">
+    <div class="logo">
+      <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233739/cavalo_rampante_raid9g.png" alt="Logo" />
+    </div>
+    <nav class="nav">
+      <ul class="nav-menu">
+        <li><a href="#">RACING</a></li>
+        <li><a href="#">SPORTS CARS</a></li>
+        <li><a href="#">COLLECTIONS</a></li>
+        <li><a href="#">EXPERIENCES</a></li>
+        <li><a href="#">ABOUT US</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+        <div class="imagem-interativa2">
+  <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233720/extractor_cagso4.avif" alt="Aerodinamicas">
+  <!-- Vídeo por cima -->
+
+  <video id="videoIntro2" autoplay muted playsinline>
+    <source src="https://res.cloudinary.com/dmxgurkfj/video/upload/v1756234001/aeromod_online-video-cutter.com_feh9cp.mp4" type="video/mp4">
+    Seu navegador não suporta vídeo HTML5.
+  </video>
+  <div class="painel">
+    <h2>EXTRACTOR</h2>
+    <p>
+Em linha com a filosofia da Ferrari de transferir inovações do mundo das corridas para os carros esportivos de rua, os engenheiros projetaram uma entrada de ar perto da borda externa da proteção traseira para fornecer ventilação para os componentes eletrônicos do silenciador.
+    </p>
+
+
+  </div>
+<button class="btn-voltar" onclick="voltarPagina()">
+  <span class="circulo">
+    &times;
+  </span>
+  <span class="texto">Fechar</span>
+</button>
+
+    <script>
+        const video = document.getElementById('videoIntro2');
+
+  video.addEventListener('ended', () => {
+    video.style.opacity = '0';
+  });
+    function voltarPagina() {
+    window.history.back();
+  }
+   window.addEventListener("load", () => {
+      document.querySelector(".painel").classList.add("ativo");
+    });
+    </script>
+
+</body>
+</html>
