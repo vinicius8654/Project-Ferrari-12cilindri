@@ -1,0 +1,124 @@
+body.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+body.fade-in {
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+  body {
+      background: #1A1A1A;
+      margin: 0;
+      padding: 0;
+    }
+
+    .imagem-interativa {
+      position: relative;
+      width: 100%;
+      height: 110%;
+      max-width: 100%;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+
+    .imagem-interativa img {
+      width: 100%;
+       height: 110%;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+  
+    .botao-circulo {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: rgba(255, 255, 255, 0.304);
+      border-radius: 50%;
+      border: 2px solid white;
+      cursor: pointer;
+      transition: transform 0.2s;
+       display: inline-block;
+      animation: pulsar 1.5s infinite ease-in-out;
+      z-index: 5;
+        box-shadow: 0 0 8px white;
+    }
+
+    .botao-circulo:hover {
+      transform: scale(1.1);
+    }
+
+    /* Posicionamentos (valores ajustáveis) */
+    .btn1 {top: 45%; left: 26%; }
+    .btn2 { top: 55%; left: 47%; }
+    .btn3 { top: 45%; left: 55%; }
+    .btn4 { top: 53%; left: 10%; }
+    .btn5 { top: 72%; left: 47%; }
+    .btn6 { top: 60%; left: 90%; } 
+    .btn7 { top: 45%; left: 89%; }
+    @keyframes pulsar {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+}
+
+/* Tooltip visível ao passar o mouse */
+.botao-circulo .tooltip {
+  font-family: 'Arial', sans-serif;
+  visibility: hidden;
+  opacity: 0;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ff000000;
+  color: white;
+  margin-top: 6px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+  z-index: 6;
+  pointer-events: none;
+}
+
+/* Mostrar tooltip ao passar o mouse */
+.botao-circulo:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+    .imagem-interativa video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 110%;
+  object-fit: cover;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
+.imagem-interativa2 video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 1s ease;
+}
