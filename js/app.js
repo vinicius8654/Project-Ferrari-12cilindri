@@ -18,3 +18,9 @@ document.querySelectorAll('a').forEach(link => {
     });
   }
 });
+window.addEventListener('pageshow', (event) => {
+  if (event.persisted) {
+    document.body.classList.remove('fade-out');
+    document.body.classList.add('fade-in');
+  }
+});
