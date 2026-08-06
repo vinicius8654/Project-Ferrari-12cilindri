@@ -70,17 +70,6 @@ window.addEventListener("scroll", () => {
   lastScrollTop = current;
 });
 
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      requestAnimationFrame(() => {
-        entry.target.classList.add('show');
-      });
-    }
-  });
-}, {
-  threshold: 0.1
-});
 
 const botao = document.getElementById("botaoPower");
 const audio = document.getElementById("audioMotor");
@@ -114,47 +103,6 @@ document.querySelectorAll('.raiox-container').forEach(container => {
     anel.style.top = `${y - 150}px`;
   });
 });
-
-    container.addEventListener('mousemove', (e) => {
-      const x = e.offsetX;
-      const y = e.offsetY;
-      imagemInterna.style.clipPath = `circle(150px at ${x}px ${y}px)`;
-      anel.style.left = `${x - 150}px`;
-      anel.style.top = `${y - 150}px`;
-    });
-
-// Aplica fade-in ao carregar
-  document.body.classList.add('fade-out');
-  window.addEventListener('DOMContentLoaded', () => {
-    requestAnimationFrame(() => {
-      document.body.classList.remove('fade-out');
-      document.body.classList.add('fade-in');
-    });
-  });
-
-  // Adiciona fade-out antes de ir para a próxima página
-  document.querySelectorAll('a').forEach(link => {
-    // Só faz para links internos
-    if (link.hostname === window.location.hostname) {
-      link.addEventListener('click', function (e) {
-        const href = link.getAttribute('href');
-
-        // ignora links com target="_blank" ou âncoras
-        if (
-          href.startsWith('#') ||
-          link.target === '_blank'
-        ) return;
-
-        e.preventDefault();
-        document.body.classList.remove('fade-in');
-        document.body.classList.add('fade-out');
-
-        setTimeout(() => {
-          window.location.href = href;
-        }, 500); // deve ser igual ao tempo do CSS
-      });
-    }
-  });
 
 function switchTab(tabName) {
   document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
@@ -214,3 +162,11 @@ function closeVideoAlbum() {
     const modal = document.getElementById('modal');
     modal.classList.remove('active');
   }
+
+window.switchTab = switchTab;
+window.openAlbum = openAlbum;
+window.closeAlbum = closeAlbum;
+window.openVideoAlbum = openVideoAlbum;
+window.closeVideoAlbum = closeVideoAlbum;
+window.openModal = openModal;
+window.closeModal = closeModal;
