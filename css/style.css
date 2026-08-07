@@ -679,3 +679,11 @@ body {
     background-color: #cc0000;
     color: #fff;
 }
+.midia-indisponivel {
+  background: #1a1a1a;
+  min-height: 200px;
+}
+.botao-audio.indisponivel {
+  opacity: 0.4;
+  pointer-events: none;
+}

@@ -48,6 +48,14 @@ Depois acesse o endereço mostrado no terminal (ex: `http://localhost:8080`).
 └── ...                    # páginas de detalhe (interior, aerodinâmica, etc.)
 ```
 
+## Dependências externas
+
+Todo o conteúdo de mídia (imagens, vídeos, áudio) é hospedado externamente no [Cloudinary](https://cloudinary.com/), conta `dmxgurkfj`. Isso mantém o repositório leve, mas cria uma dependência única: se essa conta for removida ou os links expirarem, a mídia correspondente para de carregar.
+
+**Mitigação implementada**: `app.js` detecta falhas de carregamento de imagem/vídeo/áudio e aplica um fallback visual, evitando que a página quebre.
+
+**Não resolvido**: se o Cloudinary cair definitivamente, seria necessário re-hospedar os arquivos e atualizar as URLs no HTML — isso está fora do escopo desta correção.
+
 ## Autor
 
 Desenvolvido por [vinicius8654](https://github.com/vinicius8654).
