@@ -47,3 +47,6 @@ document.addEventListener('error', (e) => {
     el.closest('.botao-audio')?.classList.add('indisponivel');
   }
 }, true); // capture:true — evento "error" não faz bubble, precisa capturar
+// Atualiza o ano do copyright automaticamente
+const copyrightYear = document.getElementById('copyright-year');
+if (copyrightYear) copyrightYear.textContent = new Date().getFullYear();
