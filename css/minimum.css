@@ -1,0 +1,30 @@
+ body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background: #1a1a1a;
+  color: white;
+  overflow-x: hidden;
+}
+.painel {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 34%;
+  height: 100vh;
+  background-color: #2a2a2a;
+  padding: 60px 40px;
+  box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+  transition: right 0.8s ease;
+  z-index: 999;
+}
+
+.painel.ativo {
+  right: 0;
+}
+
+.painel h2 {
+  font-size:18px;
+  margin-bottom: 30px;
+  line-height: 1.2;
+  text-shadow: #1a1a1a;
+}
