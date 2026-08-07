@@ -56,6 +56,18 @@ Todo o conteúdo de mídia (imagens, vídeos, áudio) é hospedado externamente 
 
 **Não resolvido**: se o Cloudinary cair definitivamente, seria necessário re-hospedar os arquivos e atualizar as URLs no HTML — isso está fora do escopo desta correção.
 
+## Sistema de login e perfil (login.html / perfil.html)
+
+Fluxo de autenticação funcional, mas totalmente simulado no navegador via
+`localStorage` — não há backend real.
+
+- **Funciona**: cadastro, login, redirecionamento pós-login, exibição de
+  perfil e cores favoritas.
+- **Limitação conhecida**: senhas em texto puro no `localStorage`. Aceitável
+  para fins acadêmicos, não deve ser referência de segurança real.
+- **Incompleto**: a estrutura de dados já prevê "carros favoritos", mas não
+  há interface para exibi-los (só cores).
+
 ## Autor
 
 Desenvolvido por [vinicius8654](https://github.com/vinicius8654).
