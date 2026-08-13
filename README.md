@@ -68,6 +68,10 @@ Fluxo de autenticação funcional, mas totalmente simulado no navegador via
 - **Incompleto**: a estrutura de dados já prevê "carros favoritos", mas não
   há interface para exibi-los (só cores).
 
+  ## Analytics
+
+Este site usa [GoatCounter](https://www.goatcounter.com/) para contar visitas — gratuito, sem cookies e sem banner de consentimento. Estatísticas públicas em: https://vinicius86.goatcounter.com
+
 ## Autor
 
 Desenvolvido por [vinicius8654](https://github.com/vinicius8654).
