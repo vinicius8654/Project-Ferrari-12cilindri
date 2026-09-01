@@ -32,7 +32,7 @@ renderer.physicallyCorrectLights = true;
 // parecido com fotos profissionais de carro — sem isso, o reflexo
 // existe mas fica mais "morno".
 const rgbeLoader = new RGBELoader();
-rgbeLoader.load('./env.hdr', (hdrTexture) => {
+rgbeLoader.load('../models/12c/monochrome_studio_02_4k.hdr', (hdrTexture) => {
   hdrTexture.mapping = THREE.EquirectangularReflectionMapping;
   scene.environment = hdrTexture;
 });
@@ -44,8 +44,8 @@ function upgradeToClearcoat(mesh) {
     metalness: old.metalness,
     roughness: old.roughness,
     clearcoat: 1.0,
-    clearcoatRoughness: 0.05,
-    envMapIntensity: 2.5, // era 1.5 — reflexo mais forte
+    clearcoatRoughness: 0.5,
+    envMapIntensity: 1.5, // era 1.5 — reflexo mais forte
   });
 
   if (Array.isArray(mesh.material)) {
@@ -279,9 +279,10 @@ document.querySelectorAll("#colorButtons button").forEach(btn => {
 const paintCategories = {
   STANDARD: [
     { name: "Rosso Corsa", color: "#ff0000", metalness: 0.15, roughness: 0.1 },
-    { name: "Rosso Mugello", color: "#5a0000", metalness: 0.3, roughness: 0.12 },
-    { name: "Giallo Modena", color: "#e1ca00", metalness: 0.15, roughness: 0.1 },
+    { name: "Rosso Mugello", color: "#5a0000", metalness: 0.1, roughness: 0.1 },
+    { name: "Giallo Modena", color: "#ffcc00", metalness: 0.15, roughness: 1.1 },
     { name: "Nero Daytona", color: "#000000", metalness: 0.5, roughness: 0.08 },
+    { name: "Grigio Scuro 792", color: "#3d3d3d", metalness: 1.0, roughness: 1.0 },
     { name: "Bianco Cervino", color: "#ffffff", metalness: 0.2, roughness: 0.12 },
   ],
   ADDITIONAL: [
@@ -289,15 +290,16 @@ const paintCategories = {
   ],
   HISTORICAL: [
     { name: "Verde British", color: "#072414", metalness: 0.35, roughness: 0.12 },
-    { name: "Blu Scozia", color: "#0d1636", metalness: 0.3, roughness: 0.12 },
+    { name: "Blu Scozia", color: "#0d1636", metalness: 1.3, roughness: 0.12 },
     { name: "Canna Di Fucile", color: "#0d1637", metalness: 0.4, roughness: 0.1 },
-    { name: "Rosso Dino", color: "#d13101", metalness: 0.15, roughness: 0.1 },
-    { name: "Celeste Trevi", color: "#50929d", metalness: 0.3, roughness: 0.12 },
+    { name: "Rosso Dino", color: "#ff1100", metalness: 0.15, roughness: 1.0 },
+    { name: "Celeste Trevi", color: "#07074e", metalness: 0.0, roughness: 2.0 },
   ],
   SPECIAL: [
-    { name: "Giallo Montecarlo", color: "#c0a104", metalness: 0.3, roughness: 0.1 },
+    { name: "Giallo Montecarlo", color: "#ff8800", metalness: 0.3, roughness: 0.1 },
     { name: "Rosso Racing 2025", color: "#640c15", metalness: 0.3, roughness: 0.1 }, // era roughness 0.8 (fosco demais)
-    { name: "Verde Toscana", color: "#748649", metalness: 0.25, roughness: 0.12 },
+    { name: "Verde Toscana", color: "#495331", metalness: 0.25, roughness: 1.0 },
+    {name: "Rosso Racing 2025 Opaco", color: "#470505", metalness:0.5, roughness: 2.0 }
   ]
 };
 
