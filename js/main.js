@@ -3,8 +3,6 @@ import { RGBELoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/l
 import * as THREE from "https://cdn.skypack.dev/three@0.129.0/build/three.module.js";
 import { OrbitControls } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/loaders/GLTFLoader.js";
-// lil-gui (UI) - CDN via skypack
-import GUI from "https://cdn.skypack.dev/lil-gui@0.18.0";
 
 const MODEL_FOLDER = "12c"; // <- ajuste aqui caso sua pasta não seja "12c"
 const MODEL_URL = `./models/${MODEL_FOLDER}/scene.gltf`;
@@ -19,7 +17,7 @@ camera.position.set(0, 1.0, 3);
 const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 renderer.setSize(container.clientWidth, container.clientHeight);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-renderer.outputEncoding = THREE.sRGBEncoding; // importante para cores corretas
+renderer.outputEncoding = THREE.sRGBEncoding;
 renderer.shadowMap.enabled = true;
 renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 container.appendChild(renderer.domElement);
@@ -28,12 +26,40 @@ renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.0;
 renderer.physicallyCorrectLights = true;
 
+// Carrega o ambiente HDR e aplica reflexo realista em toda a cena
+// IMPORTANTE: troque o conteúdo de env.hdr por um HDRI de "estúdio"
+// (grátis em polyhaven.com/hdris/studio) para o resultado ficar
+// parecido com fotos profissionais de carro — sem isso, o reflexo
+// existe mas fica mais "morno".
+const rgbeLoader = new RGBELoader();
+rgbeLoader.load('../models/12c/monochrome_studio_02_4k.hdr', (hdrTexture) => {
+  hdrTexture.mapping = THREE.EquirectangularReflectionMapping;
+  scene.environment = hdrTexture;
+});
+
+function upgradeToClearcoat(mesh) {
+  const upgrade = (old) => new THREE.MeshPhysicalMaterial({
+    color: old.color,
+    map: old.map || null,
+    metalness: old.metalness,
+    roughness: old.roughness,
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.5,
+    envMapIntensity: 1.5, // era 1.5 — reflexo mais forte
+  });
+
+  if (Array.isArray(mesh.material)) {
+    mesh.material = mesh.material.map(upgrade);
+  } else {
+    mesh.material = upgrade(mesh.material);
+  }
+}
+
 // Controls
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
 controls.dampingFactor = 0.06;
 controls.screenSpacePanning = false;
-
 
 // Luzes
 const ambient = new THREE.AmbientLight(0xffffff, 0.60);
@@ -52,7 +78,7 @@ dir.shadow.camera.left = -20;
 dir.shadow.camera.right = 20;
 dir.shadow.mapSize.set(2048, 2048);
 scene.add(dir);
-dir.shadow.bias = -0.0005; // reduz acne de sombra
+dir.shadow.bias = -0.0005;
 
 const fillLight = new THREE.PointLight(0xffffff, 0.5, 50);
 fillLight.position.set(-10, 5, -10);
@@ -62,46 +88,39 @@ scene.add(fillLight);
 const texLoader = new THREE.TextureLoader();
 const blackTex = texLoader.load("https://res.cloudinary.com/dmxgurkfj/image/upload/v1760130854/textura_viiztg.png");
 
-// Configurações da textura
 blackTex.wrapS = blackTex.wrapT = THREE.RepeatWrapping;
-blackTex.repeat.set(24, 24); // ajuste de repetição
+blackTex.repeat.set(24, 24);
 blackTex.encoding = THREE.sRGBEncoding;
 blackTex.anisotropy = renderer.capabilities.getMaxAnisotropy();
 
-// Material + geometria
 const groundGeo = new THREE.PlaneGeometry(200, 200);
 const groundMat = new THREE.MeshStandardMaterial({
   map: blackTex,
-  roughness: 0.9, // fosco
+  roughness: 0.9,
   metalness: 0.0
 });
 
 const ground = new THREE.Mesh(groundGeo, groundMat);
 ground.rotation.x = -Math.PI / 2;
-ground.position.y = -0.2;   // mais para baixo
+ground.position.y = -0.2;
 ground.receiveShadow = true;
 scene.add(ground);
-
-
-// Helpers (opcionais)
-
 
 // GLTF Loader
 const loader = new GLTFLoader();
 let model = null;
-let originalMaterials = new Map(); // guardar materiais originais
-let paintCandidates = []; // meshes que parecem pintar a carroceria
+let originalMaterials = new Map();
+let paintCandidates = [];
 
 loader.load(
   MODEL_URL,
   (gltf) => {
     model = gltf.scene;
-      model.scale.set(30, 30, 30); // 👈 aumenta o tamanho do modelo
+    model.scale.set(30, 30, 30);
     model.traverse((c) => {
       if (c.isMesh) {
         c.castShadow = true;
         c.receiveShadow = true;
-        // Corrige encodings das texturas se necessário
         if (c.material) {
           if (Array.isArray(c.material)) {
             c.material.forEach(adjustMaterial);
@@ -113,7 +132,6 @@ loader.load(
     scene.add(model);
     normalizeAndFrame(model);
     identifyPaintMeshes(model);
-    buildGUI();
     console.log("✅ Modelo carregado:", MODEL_URL);
   },
   (xhr) => {
@@ -126,37 +144,25 @@ loader.load(
   }
 );
 
-
-// Ajustes nos materiais (encodings e flags)
 function adjustMaterial(mat) {
   if (!mat) return;
-  // guarda material original
   originalMaterials.set(mat.uuid, mat);
-
-  // Encoding de textura (albedo)
   if (mat.map) mat.map.encoding = THREE.sRGBEncoding;
   if (mat.emissiveMap) mat.emissiveMap.encoding = THREE.sRGBEncoding;
-
-  // habilita física
   mat.needsUpdate = true;
 }
 
-
-// Tenta identificar quais meshes são a "pintura" do carro
 function identifyPaintMeshes(root) {
   paintCandidates = [];
   root.traverse((c) => {
     if (c.isMesh) {
       const name = (c.name || "").toLowerCase();
-      // heurísticas: nomes comuns usados em exports
       if (name.includes("body") || name.includes("paint") || name.includes("car_paint") || name.includes("carrosserie") || name.includes("chassis") || name.includes("metallic")) {
         paintCandidates.push(c);
       }
     }
   });
-  // se não encontrou, tenta usar mesh maior que X
   if (paintCandidates.length === 0) {
-    // pega os 4 maiores meshes por bounding box volume
     const arr = [];
     root.traverse((c) => {
       if (c.isMesh) {
@@ -169,75 +175,38 @@ function identifyPaintMeshes(root) {
     arr.sort((a, b) => b.vol - a.vol);
     paintCandidates = arr.slice(0, 4).map(x => x.mesh);
   }
+
+  paintCandidates.forEach(upgradeToClearcoat);
   console.log("🎨 Paint candidates:", paintCandidates.map(m => m.name || m.uuid));
 }
 
-// centraliza, normaliza escala e posiciona câmera automaticamente
 function normalizeAndFrame(object3D) {
-  // desabilita frustum culling nos meshes (evita desaparecer)
   object3D.traverse((c) => {
     if (c.isMesh) c.frustumCulled = false;
   });
 
-  // calcula bounding box
   const box = new THREE.Box3().setFromObject(object3D);
-  const size = box.getSize(new THREE.Vector3());
   const center = box.getCenter(new THREE.Vector3());
-
-  // recentra o objeto na origem
   object3D.position.sub(center);
 
-  // recomputa
-  const newBox = new THREE.Box3().setFromObject(object3D);
-  const newSize = newBox.getSize(new THREE.Vector3());
-  const maxDim = Math.max(newSize.x, newSize.y, newSize.z);
-camera.position.set(3.2, 0.0, 4.5); 
-controls.target.set(0, 0.0, 0); 
-camera.lookAt(0, 0.5, 0); 
+  camera.position.set(3.2, 0.0, 4.5);
+  controls.target.set(0, 0.0, 0);
+  camera.lookAt(0, 0.5, 0);
   controls.update();
 }
 
-// GUI
 let params = {
   paintColor: "#ff0000",
   metalness: 0.6,
-  roughness: 0.35,
+  roughness: 0.1,
   exposure: 1.0,
-  showGrid: true,
   autoRotate: false,
-  visibleParts: {}, // será preenchido
   resetCamera: () => resetCamera(),
   screenshot: () => takeScreenshot()
 };
 
-function buildGUI() {
-  // pintura — aplica em todos os candidates
-// lista de cores pré-definidas
-
-params.paintColor = colorOptions.Vermelho; // cor inicial
-  paintFolder.addColor(params, "paintColor").name("Cor").onChange(applyPaintColor);
-  paintFolder.add(params, "metalness", 0, 1, 0.01).onChange(applyPBR);
-  paintFolder.add(params, "roughness", 0, 1, 0.01).onChange(applyPBR);
-
-  const viewFolder = gui.addFolder("Visão");
-  viewFolder.add(params, "exposure", 0.1, 2, 0.01).onChange((v) => {
-    renderer.toneMappingExposure = v;
-  });
-  viewFolder.add(params, "showGrid").name("Grade").onChange((v) => grid.visible = v);
-  viewFolder.add(params, "autoRotate").name("Auto rotate");
-
-  // lista de partes detectadas (visibilidade)
-
-
-  gui.add(params, "resetCamera").name("RESET");
-  gui.add(params, "screenshot").name("SCREENSHOT");
-
-  gui.domElement.style.zIndex = 20;
-}
-
-// aplica cor na pintura (substitui/altera material)
 function applyPaintColor() {
-const color = new THREE.Color(params.paintColor);
+  const color = new THREE.Color(params.paintColor);
   paintCandidates.forEach(mesh => {
     let mat = mesh.material;
     if (Array.isArray(mat)) {
@@ -246,22 +215,13 @@ const color = new THREE.Color(params.paintColor);
   });
   function setMatColor(m, color) {
     if (!m) return;
-    m.color = color;
+    m.color.copy(color);
     m.metalness = params.metalness;
     m.roughness = params.roughness;
     m.needsUpdate = true;
   }
 }
 
-function applyPBR() {
-  paintCandidates.forEach(mesh => {
-    const mat = mesh.material;
-    if (Array.isArray(mat)) mat.forEach(m => { m.metalness = params.metalness; m.roughness = params.roughness; m.needsUpdate = true; });
-    else { mat.metalness = params.metalness; mat.roughness = params.roughness; mat.needsUpdate = true; }
-  });
-}
-
-// screenshot
 function takeScreenshot() {
   renderer.render(scene, camera);
   const dataURL = renderer.domElement.toDataURL("image/png");
@@ -271,7 +231,6 @@ function takeScreenshot() {
   a.click();
 }
 
-// reset camera
 const DEFAULT_CAMERA = camera.clone();
 function resetCamera() {
   camera.position.copy(DEFAULT_CAMERA.position);
@@ -281,7 +240,6 @@ function resetCamera() {
   controls.update();
 }
 
-// fallback cube if model fails
 function showFallbackCube() {
   const geo = new THREE.BoxGeometry(2, 1, 4);
   const mat = new THREE.MeshStandardMaterial({ color: 0x5588cc });
@@ -292,18 +250,15 @@ function showFallbackCube() {
   normalizeAndFrame(cube);
 }
 
-// UI top buttons
 document.getElementById("btn-reset").addEventListener("click", resetCamera);
 document.getElementById("btn-screenshot").addEventListener("click", takeScreenshot);
 
-// Resize
 window.addEventListener("resize", () => {
   camera.aspect = container.clientWidth / container.clientHeight;
   camera.updateProjectionMatrix();
   renderer.setSize(container.clientWidth, container.clientHeight);
 });
 
-// Loop
 function animate() {
   requestAnimationFrame(animate);
   if (params.autoRotate && model) {
@@ -314,8 +269,6 @@ function animate() {
 }
 animate();
 
-
-
 document.querySelectorAll("#colorButtons button").forEach(btn => {
   btn.addEventListener("click", (e) => {
     params.paintColor = e.target.dataset.color;
@@ -325,40 +278,40 @@ document.querySelectorAll("#colorButtons button").forEach(btn => {
 
 const paintCategories = {
   STANDARD: [
-{ name: "Rosso Corsa",  color: "#ff0000", metalness: 0.1, roughness: 0.35 },
-{ name: "Rosso Mugello",  color: "#5a0000", metalness: 0.7, roughness: 0.35 },
-{ name: "Giallo Modena",   color: "#e1ca00", metalness: 0.1, roughness: 0.3 },
-{ name: "Nero Daytona",   color: "#000000", metalness: 0.65, roughness: 0.3 },
-{ name: "Bianco Cervino", color: "#ffffff", metalness: 0.5, roughness: 0.35 },
+    { name: "Rosso Corsa", color: "#ff0000", metalness: 0.15, roughness: 0.1 },
+    { name: "Rosso Mugello", color: "#5a0000", metalness: 0.1, roughness: 0.1 },
+    { name: "Giallo Modena", color: "#ffcc00", metalness: 0.15, roughness: 1.1 },
+    { name: "Nero Daytona", color: "#000000", metalness: 0.5, roughness: 0.08 },
+    { name: "Grigio Scuro 792", color: "#3d3d3d", metalness: 1.0, roughness: 1.0 },
+    { name: "Bianco Cervino", color: "#ffffff", metalness: 0.2, roughness: 0.12 },
   ],
   ADDITIONAL: [
-{ name: "Bianco Artico", color: "#ffffffff", metalness: 0.75, roughness: 0.25 },
+    { name: "Bianco Artico", color: "#ffffff", metalness: 0.25, roughness: 0.1 }, // hex corrigido (era #ffffffff, inválido)
   ],
   HISTORICAL: [
-{ name: "Verde British",   color: "#072414", metalness: 0.87, roughness: 0.3 },
-{ name: "Blu Scozia",   color: "#0d1636", metalness: 0.6, roughness: 0.3 },
-{ name: "Canna Di Fucile",   color: "#0d1637", metalness: 0.87, roughness: 0.3 },
-{ name: "Rosso Dino",   color: "#d13101", metalness: 0.25, roughness: 0.3 },
-{ name: "Celeste Trevi",   color: "#50929d", metalness: 0.85, roughness: 0.3 },
-
+    { name: "Verde British", color: "#072414", metalness: 0.35, roughness: 0.12 },
+    { name: "Blu Scozia", color: "#0d1636", metalness: 1.3, roughness: 0.12 },
+    { name: "Canna Di Fucile", color: "#0d1637", metalness: 0.4, roughness: 0.1 },
+    { name: "Rosso Dino", color: "#ff1100", metalness: 0.15, roughness: 1.0 },
+    { name: "Celeste Trevi", color: "#07074e", metalness: 0.0, roughness: 2.0 },
   ],
   SPECIAL: [
-{ name: "Giallo Montecarlo",   color: "#c0a104", metalness: 0.75, roughness: 0.3 },
-{ name: "Rosso Racing 2025",   color:"#640c15", metalness: 0.65, roughness: 0.8 },
-{ name: "Verde Toscana",   color:"#748649", metalness: 0.65, roughness: 0.3 }
+    { name: "Giallo Montecarlo", color: "#ff8800", metalness: 0.3, roughness: 0.1 },
+    { name: "Rosso Racing 2025", color: "#640c15", metalness: 0.3, roughness: 0.1 }, // era roughness 0.8 (fosco demais)
+    { name: "Verde Toscana", color: "#495331", metalness: 0.25, roughness: 1.0 },
+    {name: "Rosso Racing 2025 Opaco", color: "#470505", metalness:0.5, roughness: 2.0 }
   ]
 };
+
 const btnContainer = document.getElementById("colorButtons");
-btnContainer.innerHTML = ""; // limpa antes
+btnContainer.innerHTML = "";
 
 Object.entries(paintCategories).forEach(([categoria, presets]) => {
-  // título da categoria
   const title = document.createElement("h3");
   title.textContent = categoria;
   title.style.color = "white";
   btnContainer.appendChild(title);
 
-  // botões da categoria
   presets.forEach(preset => {
     const btn = document.createElement("button");
     btn.style.background = preset.color;
@@ -379,4 +332,3 @@ Object.entries(paintCategories).forEach(([categoria, presets]) => {
     btnContainer.appendChild(btn);
   });
 });
-
