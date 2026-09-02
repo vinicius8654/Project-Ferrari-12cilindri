@@ -31,15 +31,10 @@ renderer.physicallyCorrectLights = true;
 // (grátis em polyhaven.com/hdris/studio) para o resultado ficar
 // parecido com fotos profissionais de carro — sem isso, o reflexo
 // existe mas fica mais "morno".
-rgbeLoader.load(
-  './models/12c/monochrome_studio_02_4k.hdr',
-  (hdrTexture) => {
-    hdrTexture.mapping = THREE.EquirectangularReflectionMapping;
-    scene.environment = hdrTexture;
-  },
-  undefined,
-  (err) => console.error('❌ Erro ao carregar env.hdr:', err)
-);
+rgbeLoader.load('models/12c/monochrome_studio_02_4k.hdr', (hdrTexture) => {
+  hdrTexture.mapping = THREE.EquirectangularReflectionMapping;
+  scene.environment = hdrTexture;
+});
 
 function upgradeToClearcoat(mesh) {
   const upgrade = (old) => new THREE.MeshPhysicalMaterial({
