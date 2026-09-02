@@ -32,7 +32,7 @@ renderer.physicallyCorrectLights = true;
 // parecido com fotos profissionais de carro — sem isso, o reflexo
 // existe mas fica mais "morno".
 const rgbeLoader = new RGBELoader();
-rgbeLoader.load('../models/12c/monochrome_studio_02_4k.hdr', (hdrTexture) => {
+rgbeLoader.load('./models/12c/monochrome_studio_02_4k.hdr', (hdrTexture) => {
   hdrTexture.mapping = THREE.EquirectangularReflectionMapping;
   scene.environment = hdrTexture;
 });
