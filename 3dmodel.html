@@ -26,16 +26,18 @@
     </nav>
   </header>
 
-  <div class="painel">
-    <h2>FERRARI 12 CILINDRI VISUALIZER</h2>
-<div id="colorButtons" style="position:absolute; top:16%; left:40px; z-index:30; display:grid; gap:7px; font-size: 10px;">
+<div class="painel">
+  <div class="painel-header">
+    <h2>PAINTWORK</h2>
   </div>
+  <p class="painel-selected-color" id="selectedColorLabel">Selecione uma cor</p>
+  <div id="colorButtons"></div>
 
-  <a href="index.html" class="btn-fechar">
+</div>
+ <a href="index.html" class="btn-fechar">
   <span class="icon">×</span>
   Fechar
 </a>
-</div>
   <div id="ui-top">
     <button id="btn-reset" style="position:absolute; top:30px; left:0px; z-index:30; display:flex; gap:10px; border-radius: 30px;">RESET</button>
     <button id="btn-screenshot" style="position:absolute; top:30px; left:70px; z-index:31; display:flex; gap:10px; border-radius: 30px">SCREENSHOT</button>
@@ -49,6 +51,6 @@
   <!-- masc: lil-gui para controles -->
   <script type="module" src="./js/main.js"></script>
   <script src="./js/painel.js"></script>
- <script data-goatcounter="https://vinicius86.goatcounter.com/count"async src="//gc.zgo.at/count.js"></script>
+<script data-goatcounter="https://vinicius86.goatcounter.com/count"async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

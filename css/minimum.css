@@ -6,25 +6,94 @@
   overflow-x: hidden;
 }
 .painel {
+  width: 320px;
+  padding: 90px 24px 24px; /* topo maior, pra não ficar embaixo do header */
+  color: #fff;
+  font-family: Arial, sans-serif;
   position: fixed;
   top: 0;
-  right: -100%;
-  width: 34%;
+  right: 0;
   height: 100vh;
-  background-color: #2a2a2a;
-  padding: 60px 40px;
-  box-shadow: -5px 0 15px rgba(0,0,0,0.5);
-  transition: right 0.8s ease;
-  z-index: 999;
+  background: rgba(10,10,10,0.92);
+  backdrop-filter: blur(6px);
+  overflow-y: auto;
+  box-sizing: border-box;
+  transform: translateX(100%);
+  transition: transform 0.35s ease;
+  z-index: 25;
 }
 
 .painel.ativo {
-  right: 0;
+  transform: translateX(0);
 }
 
-.painel h2 {
-  font-size:18px;
-  margin-bottom: 30px;
-  line-height: 1.2;
-  text-shadow: #1a1a1a;
+.painel-header {
+  margin-bottom: 4px;
+}
+
+.painel-header h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0;
+}
+
+.painel-selected-color {
+  font-size: 14px;
+  color: #aaa;
+  margin: 4px 0 20px;
+}
+
+.painel-categoria {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: #888;
+  text-transform: uppercase;
+  margin: 20px 0 10px;
+}
+
+#colorButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.painel-secao {
+  margin-bottom: 4px;
+}
+.cor-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.cor-swatch {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.15s ease;
+}
+
+.cor-swatch:hover {
+  transform: scale(1.08);
+}
+
+.cor-swatch.selecionada {
+  box-shadow: 0 0 0 2px #1a1a1a, 0 0 0 4px #fff;
+}
+
+.cor-swatch .check {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #e00000;
+  color: #fff;
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

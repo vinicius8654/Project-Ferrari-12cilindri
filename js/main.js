@@ -303,24 +303,37 @@ const paintCategories = {
     { name: "Rosso Racing 2025 Opaco", color: "#470505", metalness: 0.5, roughness: 0.9 },
   ]
 };
+function shadeColor(hex, percent) {
+  const num = parseInt(hex.replace('#', ''), 16);
+  let r = (num >> 16) + Math.round(255 * percent);
+  let g = ((num >> 8) & 0x00FF) + Math.round(255 * percent);
+  let b = (num & 0x0000FF) + Math.round(255 * percent);
+  r = Math.max(Math.min(255, r), 0);
+  g = Math.max(Math.min(255, g), 0);
+  b = Math.max(Math.min(255, b), 0);
+  return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)}`;
+}
 
 const btnContainer = document.getElementById("colorButtons");
+const selectedColorLabel = document.getElementById("selectedColorLabel");
 btnContainer.innerHTML = "";
 
 Object.entries(paintCategories).forEach(([categoria, presets]) => {
+  const section = document.createElement('div');
+  section.className = 'painel-secao';
+
   const title = document.createElement("h3");
+  title.className = "painel-categoria";
   title.textContent = categoria;
-  title.style.color = "white";
-  btnContainer.appendChild(title);
+  section.appendChild(title);
+
+  const grid = document.createElement('div');
+  grid.className = 'cor-grid';
 
   presets.forEach(preset => {
     const btn = document.createElement("button");
-    btn.style.background = preset.color;
-    btn.style.width = "20px";
-    btn.style.height = "20px";
-    btn.style.border = "none";
-    btn.style.borderRadius = "50%";
-    btn.style.cursor = "pointer";
+    btn.className = "cor-swatch";
+    btn.style.background = `linear-gradient(135deg, ${shadeColor(preset.color, 0.25)} 50%, ${shadeColor(preset.color, -0.25)} 50%)`;
     btn.title = preset.name;
 
     btn.addEventListener("click", () => {
@@ -328,8 +341,24 @@ Object.entries(paintCategories).forEach(([categoria, presets]) => {
       params.metalness = preset.metalness;
       params.roughness = preset.roughness;
       applyPaintColor();
+
+      document.querySelectorAll('.cor-swatch').forEach(b => {
+        b.classList.remove('selecionada');
+        const oldCheck = b.querySelector('.check');
+        if (oldCheck) oldCheck.remove();
+      });
+      btn.classList.add('selecionada');
+      const check = document.createElement('span');
+      check.className = 'check';
+      check.textContent = '✓';
+      btn.appendChild(check);
+
+      if (selectedColorLabel) selectedColorLabel.textContent = preset.name;
     });
 
-    btnContainer.appendChild(btn);
+    grid.appendChild(btn);
   });
+
+  section.appendChild(grid);
+  btnContainer.appendChild(section);
 });
