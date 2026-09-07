@@ -6,136 +6,10 @@
     <title>EXTRACTOR</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='./css/style.css'>
+    <link rel="stylesheet" href="./css/infos.css">
     <script src='./js/main.js'></script>
 </head>
-<style>
-      body.fade-out {
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
 
-body.fade-in {
-  opacity: 1;
-  transition: opacity 0.5s ease;
-}
-body {
-      background: #000;
-      margin: 0;
-      padding: 0;
-    }
-
-.imagem-interativa2 {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      max-width: 100%;
-      margin: 0 auto;
-      overflow: hidden;
-    }
-
-.imagem-interativa2 img {
-      width: 100%;
-       height: 100%;
-      display: block;
-      position: relative;
-      z-index: 1;
-    }
-.imagem-interativa video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 2;
-  pointer-events: none;
-  transition: opacity 1s ease;
-}
-.imagem-interativa2 video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 2;
-  pointer-events: none;
-  transition: opacity 1s ease;
-}
-.btn-voltar {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-family: Arial, sans-serif;
-}
-
-.btn-voltar .circulo {
-  background: white;
-  color: black;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-size: 24px;
-  text-align: center;
-  line-height: 40px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-.btn-voltar .texto {
-  color: white;
-  font-size: 18px;
-  margin-left: 10px;
-  font-weight: bold;
-  text-shadow: 0 0 3px black;
-}
-
-.btn-voltar:hover .circulo {
-  background: #ddd;
-}
-body {
-  margin: 0;
-  font-family: 'Arial', sans-serif;
-  background: #1a1a1a;
-  color: white;
-  overflow-x: hidden;
-}
-
-.painel {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  width: 40%;
-  height: 100vh;
-  background-color: #2a2a2a;
-  padding: 60px 40px;
-  box-shadow: -5px 0 15px rgba(0,0,0,0.5);
-  transition: right 0.8s ease;
-  z-index: 9999;
-}
-
-.painel.ativo {
-  right: 0;
-}
-
-.painel h2 {
-  font-size: 2em;
-  margin-bottom: 20px;
-  line-height: 1.2;
-}
-
-.painel p {
-  font-size: 1em;
-  line-height: 1.6;
-  margin-bottom: 16px;
-}
-
-</style>
 <body>
      <section id="section1" class="section1">
     <div>
@@ -149,6 +23,9 @@ body {
         </nav>
     </section>
     <header class="header">
+      <button id="btn-menu-mobile" class="btn-menu-mobile" aria-label="Abrir menu">
+  <span></span><span></span><span></span>
+</button>
     <div class="logo">
       <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233739/cavalo_rampante_raid9g.png" alt="Logo" />
     </div>
@@ -163,6 +40,17 @@ body {
     </nav>
   </header>
 
+    <!-- Header Hamburger -->
+<div id="menu-overlay" class="menu-overlay">
+  <button id="btn-fechar-menu" class="btn-fechar-menu" aria-label="Fechar menu">&times;</button>
+  <ul class="menu-overlay-links">
+    <li><a href="https://www.ferrari.com/en-EN/formula1">RACING</a></li>
+    <li><a href="configurator.html">SPORTS CARS</a></li>
+    <li><a href="https://store.ferrari.com/en-br/replica/replica-scuderia-ferrari/">COLLECTIONS</a></li>
+    <li><a href="https://www.ferrari.com/en-EN/museums">EXPERIENCES</a></li>
+    <li><a href="https://www.ferrari.com/en-EN/news">ABOUT US</a></li>
+  </ul>
+</div>
 
         <div class="imagem-interativa2">
   <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233720/extractor_cagso4.avif" alt="Aerodinamicas">
@@ -202,5 +90,6 @@ Em linha com a filosofia da Ferrari de transferir inovações do mundo das corri
     </script>
 
  <script data-goatcounter="https://vinicius86.goatcounter.com/count"async src="//gc.zgo.at/count.js"></script>
+  <script src="./js/app.js"></script>
 </body>
 </html>

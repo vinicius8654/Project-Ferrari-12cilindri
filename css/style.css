@@ -529,9 +529,9 @@ h1 {
   height: 100%;
   width: 100%;
 }
-/* Estilos Gerais (Complementando os seus) */
+/* Estilos Gerais */
 body {
-    font-family: 'Ferrari Sans', 'Arial', sans-serif; /* Use uma fonte moderna ou a oficial da Ferrari se a tiver */
+    font-family: 'Ferrari Sans', 'Arial', sans-serif; 
 }
 
 
@@ -686,4 +686,93 @@ body {
 .botao-audio.indisponivel {
   opacity: 0.4;
   pointer-events: none;
+}
+
+/*Menu Hambuger*/
+
+@media (max-width: 600px) {
+  header.header .nav-menu {
+    display: none;
+  }
+  header.header {
+    padding: 5px 20px;
+  }
+}
+
+.btn-menu-mobile {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+}
+.btn-menu-mobile span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+}
+
+@media (max-width: 600px) {
+  .btn-menu-mobile {
+    display: flex;
+  }
+}
+
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0a0a0a;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+  box-sizing: border-box;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease;
+}
+
+.menu-overlay.ativo {
+  opacity: 1;
+  visibility: visible;
+}
+
+.btn-fechar-menu {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.menu-overlay-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.menu-overlay-links a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  font-size: 20px;
+  text-transform: uppercase;
 }

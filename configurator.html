@@ -10,93 +10,16 @@
     <link rel="stylesheet" type="text/css" media="screen" href="./css/configurator.css">
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/galeria.css">
+    <link rel="stylesheet" href="./css/seletorcarros.css">
 
-    <style>
-        body {
-            background: #1A1A1A;
-            margin: 0;
-            padding: 0;
-            font-family: 'Ferrari Sans', Arial, sans-serif; /* Assumindo uma fonte Ferrari ou fallback */
-            color: #fff;
-        }
-
-        /* Classes de cores para os botões e outros ajustes */
-        .color-buttons button,
-        .botoes button,
-        .botoess button {
-            padding: 40px 45px;
-            margin: 5px;
-            border-radius: 50px;
-            cursor: pointer;
-            color: #fff;
-            border: 1px solid #ccc;
-            transition: all 0.3s ease;
-            font-weight: bold;
-            position: relative; /* Para o botão de favorito */
-        }
-
-        /* Botão de favorito dentro do botão de cor */
-        .color-buttons button .fav-btn,
-        .botoes button .fav-btn,
-        .botoess button .fav-btn {
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 1.2em;
-            cursor: pointer;
-            padding: 0;
-            margin-left: 10px;
-            vertical-align: middle;
-            transition: color 0.3s;
-        }
-
-        .color-buttons button .fav-btn.favorited,
-        .botoes button .fav-btn.favorited,
-        .botoess button .fav-btn.favorited {
-            color: gold; /* Cor quando favoritado */
-        }
-        
-        /* Paleta de cores (MANTIDA) */
-        /* ... (todas as suas classes de cores anteriores aqui) ... */
-        .color-buttons button:nth-child(1) { background: #ff1e1e; color: #ffffff; border: 1px solid #ccc; } /* Rosso Corsa */
-        .color-buttons button:nth-child(2) { background: #c0a104; color: #000; border: 1px solid #ccc; } /* Giallo Montecarlo */
-        .color-buttons button:nth-child(3) { background: #b22222; color: #dfcccc; border: 1px solid #ccc; } /* Rosso Imola */
-        .color-buttons button:nth-child(4) { background: #fff; color: #000; border: 1px solid #ccc; } /* Bianco Artico */
-        .color-buttons button:nth-child(5) { background: #0046ad; color: #ffffff; border: 1px solid #ccc;} /* Blu Corsa */
-        .color-buttons button:nth-child(6) { background: #50929d; color: #000; border: 1px solid #ccc; } /* Celeste Trevi */
-        .color-buttons button:nth-child(7) { background: #cecece; color: #000; border: 1px solid #ccc; } /* Argento Nurburgring */
-        
-        .botoes button:nth-child(1) { background: #ff1e1e; color: #ffffff; } /* Argento Nurburgring */
-        .botoes button:nth-child(2) { background: #c0a104; color: #000; } /* Argento Nurburgring */
-        .botoes button:nth-child(3) { background: #b22222; color: #ffffff; } /* Argento Nurburgring */
-        .botoes button:nth-child(4) { background: #fff; color: #000; } /* Argento Nurburgring */
-        .botoes button:nth-child(5) { background: #2d0707; color: #ffffff; } /* Argento Nurburgring */
-        .botoes button:nth-child(6) { background: #10afac; color: #000; } /* Argento Nurburgring */
-        .botoes button:nth-child(7) { background: #340052; color: #f0f0f0; } /* Argento Nurburgring */
-        .botoes button:nth-child(8) { background: #a2a4a2; color: #000; } /* Argento Nurburgring */
-
-        .botoess button:nth-child(1) { background: #ff1e1e; color: #fffefe; } /* Grigio Titanio Metallizzato*/
-        .botoess button:nth-child(2) { background: #c0a104; color: #000; } /* Rosso imola */
-        .botoess button:nth-child(3) { background: #b22222; color: #ffffff; } /* Giallo Modena */
-        .botoess button:nth-child(4) { background:  #96b9da; color: #000; } /* Rosso Imola */
-        .botoess button:nth-child(5) { background: #050131; color: #ffffff; } /* Asseto Fiorano Rosso Imola */
-        .botoess button:nth-child(6) { background: #b00404; color: #eaeaea; } /* Asseto Fiorano Blu De France */
-        .botoess button:nth-child(7) { background: #292829; color: #f0f0f0; } /* Asseto Fiorano Grigio Scuro */
-        /* Ocultar todas imagens exceto a ativa */
-        section img {
-            max-width: 100%;
-            opacity: 0;
-            transition: opacity 0.7s ease; /* efeito de fade */
-        }
-        section img.active {
-            display: block;
-            opacity: 1;
-        }
-    </style>
+    
 </head>
 <body class="fade-in">
 
     <header class="header">
+        <button id="btn-menu-mobile" class="btn-menu-mobile" aria-label="Abrir menu">
+  <span></span><span></span><span></span>
+</button>
         <div class="logo">
             <a href="index.html">
                 <img src="https://res.cloudinary.com/dmxgurkfj/image/upload/v1756233739/cavalo_rampante_raid9g.png" alt="Logo" />
@@ -132,6 +55,18 @@
             </div>
         </div>
         </header>
+
+          <!-- Header Hamburger -->
+<div id="menu-overlay" class="menu-overlay">
+  <button id="btn-fechar-menu" class="btn-fechar-menu" aria-label="Fechar menu">&times;</button>
+  <ul class="menu-overlay-links">
+    <li><a href="https://www.ferrari.com/en-EN/formula1">RACING</a></li>
+    <li><a href="configurator.html">SPORTS CARS</a></li>
+    <li><a href="https://store.ferrari.com/en-br/replica/replica-scuderia-ferrari/">COLLECTIONS</a></li>
+    <li><a href="https://www.ferrari.com/en-EN/museums">EXPERIENCES</a></li>
+    <li><a href="https://www.ferrari.com/en-EN/news">ABOUT US</a></li>
+  </ul>
+</div>
 
     <a href="index.html" class="btn-fechar">
         <span class="icon">×</span> Fechar
@@ -436,5 +371,6 @@
 
     </script>
  <script data-goatcounter="https://vinicius86.goatcounter.com/count"async src="//gc.zgo.at/count.js"></script>
+  <script src="./js/app.js"></script>
 </body>
 </html>
