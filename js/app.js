@@ -50,3 +50,21 @@ document.addEventListener('error', (e) => {
 // Atualiza o ano do copyright automaticamente
 const copyrightYear = document.getElementById('copyright-year');
 if (copyrightYear) copyrightYear.textContent = new Date().getFullYear();
+
+const btnMenuMobile = document.getElementById('btn-menu-mobile');
+const menuOverlay = document.getElementById('menu-overlay');
+const btnFecharMenu = document.getElementById('btn-fechar-menu');
+
+if (btnMenuMobile && menuOverlay) {
+  btnMenuMobile.addEventListener('click', () => {
+    menuOverlay.classList.add('ativo');
+  });
+  btnFecharMenu.addEventListener('click', () => {
+    menuOverlay.classList.remove('ativo');
+  });
+  menuOverlay.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menuOverlay.classList.remove('ativo');
+    });
+  });
+}
